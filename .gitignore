@@ -1,1 +1,3 @@
 # test
+/client/bot/node_modules/
+/client/bot/.wwebjs_*
