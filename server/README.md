@@ -5,3 +5,11 @@
 ```bash
 python -m venv .\.venv\
 ```
+
+Потом здесь продолжим...
+
+# Запуск тестового сервера
+
+```bash
+fastapi dev run_server.py
+```
