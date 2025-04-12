@@ -1,3 +1,6 @@
-# test
+# client
 /client/bot/node_modules/
 /client/bot/.wwebjs_*
+
+# server
+/server/__pycache__/
