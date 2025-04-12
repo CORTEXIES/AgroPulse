@@ -1,4 +1,9 @@
 ================================================================================
+File: "D:\other\Code\hackathon\server\.gitignore"
+================================================================================
+/output.txt/
+
+================================================================================
 File: "D:\other\Code\hackathon\server\main.py"
 ================================================================================
 from scripts.ProcessingAlgorithms.algorithms import LowerAlgorithm, AbbrExpandAlgorithm, NumsProcAlgorithm, SpellCheckAlgorithm
@@ -14,7 +19,7 @@ def preproc_texts(data, preproc_dir):
     text_handler.add_algorithm(LowerAlgorithm())
     text_handler.add_algorithm(AbbrExpandAlgorithm(preproc_dir))
     text_handler.add_algorithm(NumsProcAlgorithm())
-    text_handler.add_algorithm(SpellCheckAlgorithm(preproc_dir))
+    # text_handler.add_algorithm(SpellCheckAlgorithm(preproc_dir))
 
     for i in range(len(data)):
         data[i] = text_handler.process_text(data[i])
@@ -157,6 +162,159 @@ async def process_messages(messages: list[AgroMessage]):
 
 
 ================================================================================
+File: "D:\other\Code\hackathon\server\text_info\dictionary.txt"
+================================================================================
+агрегат
+агрегата
+агрегатов
+амазон
+боронование
+бригада
+валовый
+вввезено
+внесен
+внесение
+воронежская
+восход
+всего
+вспашка
+всходовое
+вторая
+второе
+выкашивание
+вымочки
+вырав
+выравн
+выравнивание
+выравнивания
+гербецида
+гербицидов
+грунта
+грызунов
+данный
+день
+дигестия
+дискование
+довсходовое
+дракула
+завершен
+завод
+закончили
+затравка
+защиты
+зерно
+зерновых
+кагат
+кагата
+коломейцево
+колхоз
+корм
+кропоткинское
+куклы
+кукурузное
+кукурузный
+кукурузу
+кукурузы
+культ
+культивация
+культура
+минеральные
+минеральных
+мир
+многолетние
+момент
+мышевидных
+на
+нарастающим
+начала
+ночь
+обработка
+овса
+озимая
+озимой
+озимому
+озимым
+озимых
+операции
+осадки
+осталось
+остаток
+отделение
+отцовские
+пахота
+первая
+плана
+площадь
+пневмоход
+по
+под
+подготовка
+подкорм
+подкормка
+подсолнечник
+подсолнечника
+подсолнухи
+полевые
+положено
+попу
+посев
+посевов
+после
+почвен
+предпосевная
+предпосевное
+прогресс
+прокатывание
+противозлакового
+пшеница
+пшенице
+пшеницу
+пшеницы
+площадь
+работал
+работало
+работы
+районах
+рапс
+рапса
+рапсе
+рапсу
+рассвет
+растений
+сахарная
+сахарной
+сахарную
+свекла
+свеклу
+свеклы
+свёкла
+свёклу
+север
+селитра
+семенной
+силос
+след
+сои
+сою
+сплошная
+срадство
+товарной
+травам
+травы
+уборка
+удобрений
+урожайность
+формирование
+химпрополка
+человек
+чизелевание
+чизлование
+юг
+ячмень
+ячменю
+
+
+================================================================================
 File: "D:\other\Code\hackathon\server\scripts\ProcessingAlgorithms\algorithms.py"
 ================================================================================
 import pandas as pd
@@ -222,22 +380,21 @@ class NumsProcAlgorithm(ProcessingAlgorithm):
             text = text.replace(match, f'площадь за день {per_day} площадь с начала операции {per_operation}')
         return text
 
+# TODO: Исправить этот класс. Он всегда выдает неверные предположения.
 class SpellCheckAlgorithm(ProcessingAlgorithm):
     def __init__(self, preproc_dir: Path):
         super().__init__()
         self.sym_spell = SymSpell()
-
+        
         # Получение слов из edited_unique_words.xlsx
         words = pd.read_excel(preproc_dir / "edited_unique_words.xlsx").transpose().to_numpy()[1]
         
-        with tempfile.NamedTemporaryFile(mode="w+", delete=False, encoding="utf-8") as temp_file:
+        dictionary_file = preproc_dir / "dictionary.txt"
+        with open(dictionary_file, mode="w", encoding="utf-8") as dict_file:
             for word in words:
-                temp_file.write(word + "\n")
-            temp_file_path = temp_file.name
-
-        self.sym_spell.create_dictionary(temp_file_path)
-
-        os.unlink(temp_file_path)
+                dict_file.write(word + "\n")
+        
+        self.sym_spell.create_dictionary(str(dictionary_file))
 
     def process_text(self, text: str) -> str:
         correct_lines = []
@@ -248,6 +405,7 @@ class SpellCheckAlgorithm(ProcessingAlgorithm):
                     correct_words.append(word)
                     continue
                 susgestions = self.sym_spell.lookup(word, max_edit_distance=2, verbosity=Verbosity.CLOSEST)
+                # print(f"All suggestions for '{word}': {[s.term for s in susgestions]}")
                 if susgestions:
                     correct_words.append(susgestions[0].term)
                 else:

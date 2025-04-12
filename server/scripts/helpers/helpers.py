@@ -16,3 +16,9 @@ def generate_unique_words(data_dir, preproc_dir):
             words.add(word.lower())
     words = sorted(list(words))
     save_unique_words(words, preproc_dir)
+
+def transform_xlsx_into_csv(data_dir, name):
+    data = pd.read_excel(data_dir / (name + '.xlsx'))
+    # print(data.head())
+    data = data.drop(data.columns[[0, 1]], axis=1)
+    data.to_csv(data_dir / (name + '.csv'), index=False)
