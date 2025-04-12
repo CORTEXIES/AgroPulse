@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import re
+import tempfile
+import os
 from symspellpy import SymSpell, Verbosity
 from pathlib import Path
 
@@ -59,16 +61,37 @@ class NumsProcAlgorithm(ProcessingAlgorithm):
             text = text.replace(match, f'площадь за день {per_day} площадь с начала операции {per_operation}')
         return text
 
+# TODO: Исправить этот класс. Он всегда выдает неверные предположения.
 class SpellCheckAlgorithm(ProcessingAlgorithm):
-    def __init__(self):
+    def __init__(self, preproc_dir: Path):
         super().__init__()
         self.sym_spell = SymSpell()
+        
+        # Получение слов из edited_unique_words.xlsx
+        words = pd.read_excel(preproc_dir / "edited_unique_words.xlsx").transpose().to_numpy()[1]
+        
+        dictionary_file = preproc_dir / "dictionary.txt"
+        with open(dictionary_file, mode="w", encoding="utf-8") as dict_file:
+            for word in words:
+                dict_file.write(word + "\n")
+        
+        self.sym_spell.create_dictionary(str(dictionary_file))
 
     def process_text(self, text: str) -> str:
         correct_lines = []
         for line in text.split('\n'):
-            susgestions = self.sym_spell.lookup_compound(line, max_edit_distance=2)
-            correct_lines.append(susgestions[0].term)
+            correct_words = []
+            for word in line.split(' '):
+                if any(str.isdigit(ch) for ch in word):
+                    correct_words.append(word)
+                    continue
+                susgestions = self.sym_spell.lookup(word, max_edit_distance=2, verbosity=Verbosity.CLOSEST)
+                # print(f"All suggestions for '{word}': {[s.term for s in susgestions]}")
+                if susgestions:
+                    correct_words.append(susgestions[0].term)
+                else:
+                    correct_words.append(word)
+            correct_lines.append(' '.join(correct_words))
         text = '\n'.join(correct_lines)
         return text
 

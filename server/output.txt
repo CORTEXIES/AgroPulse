@@ -1,0 +1,319 @@
+================================================================================
+File: "D:\other\Code\hackathon\server\main.py"
+================================================================================
+from scripts.ProcessingAlgorithms.algorithms import LowerAlgorithm, AbbrExpandAlgorithm, NumsProcAlgorithm, SpellCheckAlgorithm
+from scripts.ProcessingAlgorithms.texthandler import TextHandler
+from scripts.helpers.words_getter import generate_unique_words
+from scripts.helpers.xlsx_saver import save_data_table
+from pathlib import Path
+import pandas as pd
+
+def preproc_texts(data, preproc_dir):
+    text_handler = TextHandler()
+    
+    text_handler.add_algorithm(LowerAlgorithm())
+    text_handler.add_algorithm(AbbrExpandAlgorithm(preproc_dir))
+    text_handler.add_algorithm(NumsProcAlgorithm())
+    text_handler.add_algorithm(SpellCheckAlgorithm(preproc_dir))
+
+    for i in range(len(data)):
+        data[i] = text_handler.process_text(data[i])
+    
+    return data
+
+def main():
+    # Получение информации
+    root = Path('.')
+    data_dir = root / "data"
+    preproc_dir = root / "text_info"
+    data = pd.read_excel(data_dir / "data.xlsx").transpose().to_numpy()[0]
+
+    initial_data = data.copy()
+
+    data = preproc_texts(data, preproc_dir)
+    save_data_table(data, initial_data, data_dir)
+
+
+main()
+
+
+================================================================================
+File: "D:\other\Code\hackathon\server\output.txt"
+================================================================================
+================================================================================
+File: "D:\other\Code\hackathon\server\README.md"
+================================================================================
+# Ход установки
+
+1. Создание виртуальной среды
+
+```bash
+python -m venv .\.venv\
+```
+
+Потом здесь продолжим...
+
+# Запуск тестового сервера
+
+```bash
+fastapi dev run_server.py
+```
+
+
+================================================================================
+File: "D:\other\Code\hackathon\server\requirements.txt"
+================================================================================
+annotated-types==0.7.0
+anyio==4.9.0
+certifi==2025.1.31
+click==8.1.8
+colorama==0.4.6
+dnspython==2.7.0
+editdistpy==0.1.5
+email_validator==2.2.0
+et_xmlfile==2.0.0
+fastapi==0.115.12
+fastapi-cli==0.0.7
+h11==0.14.0
+httpcore==1.0.7
+httptools==0.6.4
+httpx==0.28.1
+idna==3.10
+Jinja2==3.1.6
+markdown-it-py==3.0.0
+MarkupSafe==3.0.2
+mdurl==0.1.2
+numpy==2.2.4
+openpyxl==3.1.5
+pandas==2.2.3
+pydantic==2.11.3
+pydantic_core==2.33.1
+Pygments==2.19.1
+python-dateutil==2.9.0.post0
+python-dotenv==1.1.0
+python-multipart==0.0.20
+pytz==2025.2
+PyYAML==6.0.2
+rich==14.0.0
+rich-toolkit==0.14.1
+shellingham==1.5.4
+six==1.17.0
+sniffio==1.3.1
+starlette==0.46.1
+symspellpy==6.9.0
+typer==0.15.2
+typing-inspection==0.4.0
+typing_extensions==4.13.2
+tzdata==2025.2
+uvicorn==0.34.0
+watchfiles==1.0.5
+websockets==15.0.1
+
+
+================================================================================
+File: "D:\other\Code\hackathon\server\run_server.py"
+================================================================================
+from fastapi import FastAPI
+from pydantic import BaseModel
+import random
+from datetime import datetime
+
+app = FastAPI()
+
+class AgroMessage(BaseModel):
+    senderName: str
+    telegramId: str
+    text: str
+
+class MessageClassification(BaseModel):
+    data: datetime
+    department: str
+    operation: str
+    plant: str
+    perDay: int
+    perOperation: int
+    grosPerDay: int
+    grosPerOperation: int
+
+
+@app.post("/messages/proc_many")
+async def process_messages(messages: list[AgroMessage]):
+    responses = []
+    for i in range(len(messages)):
+        m = messages[i]
+        response = MessageClassification(
+            data=datetime.now(),
+            department=f"Имя пользователя: {m.senderName}",
+            operation=f"Telegram id: {m.telegramId}",
+            plant=f"Полученное сообщение: {m.text}",
+            perDay=random.randint(1, 100000),
+            perOperation=random.randint(1, 100000),
+            grosPerDay=random.randint(1, 100000),
+            grosPerOperation=random.randint(1, 100000),
+        )
+        responses.append(response)
+    
+    return {"response": responses}
+
+
+================================================================================
+File: "D:\other\Code\hackathon\server\scripts\ProcessingAlgorithms\algorithms.py"
+================================================================================
+import pandas as pd
+import numpy as np
+import re
+import tempfile
+import os
+from symspellpy import SymSpell, Verbosity
+from pathlib import Path
+
+# super class
+class ProcessingAlgorithm:
+    def process_text(self, text: str) -> str:
+        return 'Processed text:' + text
+
+# derived classes
+class LowerAlgorithm(ProcessingAlgorithm):
+    def __init__(self):
+        super().__init__()
+
+    def process_text(self, text: str) -> str:
+        return text.replace('\xa0', ' ').lower()
+    
+class AbbrExpandAlgorithm(ProcessingAlgorithm):
+    def __init__(self, preproc_dir: Path):
+        super().__init__()
+        # reading abbreviations
+        abbreviations = pd.read_excel(preproc_dir / 'abbriviations.xlsx').to_numpy()
+        abbreviations = dict(abbreviations[:, 1:3].tolist())
+        for key, val in list(abbreviations.items()):
+            new_key = ''.join(key.split())
+            abbreviations[new_key] = val
+            new_key = ''.join(map(lambda s: s + '.', key.split()))
+            abbreviations[new_key] = val
+            new_key = ' '.join(map(lambda s: s + '.', key.split()))
+            abbreviations[new_key] = val
+        abbreviations = np.array(list(abbreviations.items()))
+        abbreviations = abbreviations[abbreviations[:, 0].argsort()[::-1]]
+        self.abbreviations = abbreviations
+
+        output = pd.DataFrame({'abbreviation': abbreviations[:,0], 'full_text': abbreviations[:,1]})
+        output.to_excel(preproc_dir / 'sortedabbriviations.xlsx')
+
+    def process_text(self, text: str) -> str:
+        for pair in self.abbreviations:
+            if text.startswith(pair[0] + ' '):
+                text.replace(pair[0] + ' ', pair[1] + ' ', 1)
+            text = text.replace(' ' + pair[0] + ' ', ' ' + pair[1] + ' ')
+            text = text.replace(' ' + pair[0] + '\n', ' ' + pair[1] + '\n')
+            text = text.replace('\n' + pair[0] + ' ', '\n' + pair[1] + ' ')
+            text = text.replace('\n' + pair[0] + '\n', '\n' + pair[1] + '\n')
+        return text
+
+class NumsProcAlgorithm(ProcessingAlgorithm):
+    def __init__(self):
+        super().__init__()
+
+    def process_text(self, text: str) -> str:
+        pattern = r'(\d+/\d+)'
+        matches = re.findall(pattern, text)
+        for match in matches:
+            per_day, per_operation = match.split('/')
+            text = text.replace(match, f'площадь за день {per_day} площадь с начала операции {per_operation}')
+        return text
+
+class SpellCheckAlgorithm(ProcessingAlgorithm):
+    def __init__(self, preproc_dir: Path):
+        super().__init__()
+        self.sym_spell = SymSpell()
+
+        # Получение слов из edited_unique_words.xlsx
+        words = pd.read_excel(preproc_dir / "edited_unique_words.xlsx").transpose().to_numpy()[1]
+        
+        with tempfile.NamedTemporaryFile(mode="w+", delete=False, encoding="utf-8") as temp_file:
+            for word in words:
+                temp_file.write(word + "\n")
+            temp_file_path = temp_file.name
+
+        self.sym_spell.create_dictionary(temp_file_path)
+
+        os.unlink(temp_file_path)
+
+    def process_text(self, text: str) -> str:
+        correct_lines = []
+        for line in text.split('\n'):
+            correct_words = []
+            for word in line.split(' '):
+                if any(str.isdigit(ch) for ch in word):
+                    correct_words.append(word)
+                    continue
+                susgestions = self.sym_spell.lookup(word, max_edit_distance=2, verbosity=Verbosity.CLOSEST)
+                if susgestions:
+                    correct_words.append(susgestions[0].term)
+                else:
+                    correct_words.append(word)
+            correct_lines.append(' '.join(correct_words))
+        text = '\n'.join(correct_lines)
+        return text
+
+
+
+================================================================================
+File: "D:\other\Code\hackathon\server\scripts\ProcessingAlgorithms\texthandler.py"
+================================================================================
+from .algorithms import ProcessingAlgorithm
+
+class TextHandler:
+    def __init__(self):
+        self.algos = list()
+
+    def add_algorithm(self, algo: ProcessingAlgorithm):
+        self.algos.append(algo)
+    
+    def process_text(self, text: str) -> str:
+        for algo in self.algos:
+            text = algo.process_text(text)
+        return text
+
+================================================================================
+File: "D:\other\Code\hackathon\server\scripts\helpers\words_getter.py"
+================================================================================
+from .xlsx_saver import save_unique_words
+import numpy as np
+import pandas as pd
+
+# В этом файле содержатся методы, помогающие в ходе работы
+
+
+# Уже должен быть сформирован файл postprocdata.xlsx
+def generate_unique_words(data_dir, preproc_dir):
+    data = pd.read_excel(data_dir / 'postprocdata.xlsx').transpose().to_numpy()[2]
+    words = set()
+    for line in data:
+        for word in line.split():
+            if any(str.isdigit(ch) for ch in word):
+                continue
+            words.add(word.lower())
+    words = sorted(list(words))
+    save_unique_words(words, preproc_dir)
+
+
+================================================================================
+File: "D:\other\Code\hackathon\server\scripts\helpers\xlsx_saver.py"
+================================================================================
+import pandas as pd
+
+# В этом файле содержатся методы для работы с xlsx
+
+def save_sorted_abbr_table(data, dir):
+    output = pd.DataFrame({'abbreviation': data[:,0], 'full_text': data[:,1]})
+    output.to_excel(dir / 'sortedabbriviations.xlsx')
+
+def save_data_table(data, initial_data, dir):
+    output = pd.DataFrame({'initial': initial_data, 'postproc_data': data})
+    output.to_excel(dir / "postprocdata.xlsx")
+
+def save_unique_words(words, dir):
+    output = pd.DataFrame({'word': words})
+    output.to_excel(dir / 'unique_words.xlsx')
+
