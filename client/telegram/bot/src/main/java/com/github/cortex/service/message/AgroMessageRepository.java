@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
-public class MessageRepository {
+public class AgroMessageRepository {
 
     private final List<AgroMessage> messages = new CopyOnWriteArrayList<>();
 

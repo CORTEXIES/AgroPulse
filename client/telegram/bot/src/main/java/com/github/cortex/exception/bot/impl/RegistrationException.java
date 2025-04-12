@@ -1,6 +1,8 @@
-package com.github.cortex.exception;
+package com.github.cortex.exception.bot.impl;
 
-public class RegistrationException extends TelegramBotException{
+import com.github.cortex.exception.bot.TelegramBotException;
+
+public class RegistrationException extends TelegramBotException {
 
     public RegistrationException(String message) {
         super(message);

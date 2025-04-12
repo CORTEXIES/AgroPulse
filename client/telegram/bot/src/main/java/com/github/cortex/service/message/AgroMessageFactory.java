@@ -1,27 +1,29 @@
 package com.github.cortex.service.message;
 
 import com.github.cortex.messaging.dto.AgroMessage;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 @Service
-public class UserMessageService {
+public class AgroMessageFactory {
 
-    private final MessageRepository messageRepository;
+    private final AgroMessageRepository agroMessageRepository;
 
     @Autowired
-    public UserMessageService(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
+    public AgroMessageFactory(AgroMessageRepository agroMessageRepository) {
+        this.agroMessageRepository = agroMessageRepository;
     }
 
-    public void extractAndRecord(Message msg) {
-        AgroMessage agroMessage = createUserMessage(msg);
-        messageRepository.add(agroMessage);
+    public void createAndRecord(Message msg) {
+        AgroMessage agroMessage = create(msg);
+        agroMessageRepository.add(agroMessage);
     }
 
-    private AgroMessage createUserMessage(Message msg) {
+    private AgroMessage create(Message msg) {
         User consumer = msg.getFrom();
         String sender = consumer.getFirstName();
         if (consumer.getLastName() != "null") {

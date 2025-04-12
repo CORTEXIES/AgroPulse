@@ -1,4 +1,4 @@
-package com.github.cortex.exception;
+package com.github.cortex.exception.bot;
 
 public class TelegramBotException extends RuntimeException {
 

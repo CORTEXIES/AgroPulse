@@ -11,5 +11,4 @@ public class PhotoController {
     public void handle(List<PhotoSize> photoData) {
 
     }
-
 }

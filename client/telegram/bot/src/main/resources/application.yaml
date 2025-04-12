@@ -5,7 +5,12 @@ spring:
 bot:
   name: ${BOT_NAME}
   token: ${BOT_TOKEN}
-  message_recording_delay: ${MESSAGE_RECORDING_DELAY}
+  request_delay: ${MESSAGE_RECORDING_DELAY}
   command:
     prefix: ${COMMAND_PREFIX}
     get_report: ${COMMAND_GET_REPORT}
+
+
+proxy:
+  post:
+    url: ${POST_URL}

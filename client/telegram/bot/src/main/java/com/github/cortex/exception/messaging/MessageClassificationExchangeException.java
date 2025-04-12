@@ -1,7 +1,7 @@
-package com.github.cortex.exception;
+package com.github.cortex.exception.messaging;
 
-public class SerializeMessageException extends TelegramBotException{
-    public SerializeMessageException(String message) {
+public class MessageClassificationExchangeException extends RuntimeException {
+    public MessageClassificationExchangeException(String message) {
         super(message);
     }
 }

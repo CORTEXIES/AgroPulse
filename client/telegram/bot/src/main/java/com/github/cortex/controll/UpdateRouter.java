@@ -1,18 +1,21 @@
 package com.github.cortex.controll;
 
-import com.github.cortex.exception.HandlerNotFoundException;
-import com.github.cortex.service.message.handler.Handler;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod;
+
+import com.github.cortex.service.message.handler.Handler;
+import com.github.cortex.exception.bot.impl.HandlerNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+import lombok.extern.log4j.Log4j2;
+
 @Log4j2
+@Service
 public class UpdateRouter {
 
     private final List<Handler> handlers;

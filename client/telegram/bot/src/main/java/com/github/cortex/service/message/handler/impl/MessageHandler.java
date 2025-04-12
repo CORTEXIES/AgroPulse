@@ -1,15 +1,17 @@
 package com.github.cortex.service.message.handler.impl;
 
-import com.github.cortex.service.message.UserMessageService;
-import com.github.cortex.service.message.command.CommandExecutor;
 import com.github.cortex.service.message.handler.Handler;
+import com.github.cortex.service.message.AgroMessageFactory;
 import com.github.cortex.service.message.photo.PhotoController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.github.cortex.service.message.command.CommandExecutor;
+
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
+import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod;
 
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ import java.util.Optional;
 public class MessageHandler implements Handler {
 
     private final PhotoController photoController;
-    private final UserMessageService userMessageService;
+    private final AgroMessageFactory agroMessageFactory;
     private final CommandExecutor commandExecutor;
 
     @Value("${bot.command.prefix}")
@@ -26,11 +28,11 @@ public class MessageHandler implements Handler {
     @Autowired
     public MessageHandler(
             PhotoController photoController,
-            UserMessageService userMessageService,
+            AgroMessageFactory agroMessageFactory,
             CommandExecutor commandExecutor
     ) {
         this.photoController = photoController;
-        this.userMessageService = userMessageService;
+        this.agroMessageFactory = agroMessageFactory;
         this.commandExecutor = commandExecutor;
     }
 
@@ -55,7 +57,7 @@ public class MessageHandler implements Handler {
         if (text.startsWith(COMMAND_PREFIX)) {
             return commandExecutor.execute(text);
         }
-        userMessageService.extractAndRecord(msg);
+        agroMessageFactory.createAndRecord(msg);
         return Optional.empty();
     }
 }
