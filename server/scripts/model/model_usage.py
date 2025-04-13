@@ -62,7 +62,7 @@ def convert_labels_to_output(text, labels):
     out_per_it = dict()
 
     if len(labels) > len(tokens):
-        raise ValueError("Why more labels then words? It's impossible in this implementation! HOW?!") 
+        labels = labels[:len(tokens)]
     
     last_saved = True
     prev_label = None
