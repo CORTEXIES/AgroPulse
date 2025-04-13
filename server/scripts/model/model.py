@@ -30,12 +30,13 @@ def train_model(tokenized_data):
 
     # Определение аргументов обучения
     training_args = TrainingArguments(
+        lr_scheduler_type="linear",
         output_dir="./results",
         eval_strategy="epoch",
-        learning_rate=2e-5,
+        learning_rate=1e-5,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
-        num_train_epochs=10,
+        num_train_epochs=120,
         weight_decay=0.01,
     )
 
@@ -105,7 +106,8 @@ def tokenize_and_align_labels(data, tokenizer):
     tokenized_inputs = tokenizer(
         data["postproc_data"].tolist(),
         truncation=True,
-        padding=True,
+        padding='max_length',
+        max_length=300,
         is_split_into_words=False, 
         return_tensors="pt",
     )
