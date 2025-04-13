@@ -12,32 +12,38 @@ class ProcessingAlgorithm:
         return 'Processed text:' + text
 
 # derived classes
+# Удаляет символы \xa0 и переводит в нижний регистр
 class LowerAlgorithm(ProcessingAlgorithm):
     def __init__(self):
         super().__init__()
 
     def process_text(self, text: str) -> str:
         return text.replace('\xa0', ' ').lower()
-    
-class AbbrExpandAlgorithm(ProcessingAlgorithm):
-    def __init__(self, preproc_dir: Path):
-        super().__init__()
-        # reading abbreviations
-        abbreviations = pd.read_excel(preproc_dir / 'abbriviations.xlsx').to_numpy()
-        abbreviations = dict(abbreviations[:, 1:3].tolist())
-        for key, val in list(abbreviations.items()):
-            new_key = ''.join(key.split())
-            abbreviations[new_key] = val
-            new_key = ''.join(map(lambda s: s + '.', key.split()))
-            abbreviations[new_key] = val
-            new_key = ' '.join(map(lambda s: s + '.', key.split()))
-            abbreviations[new_key] = val
-        abbreviations = np.array(list(abbreviations.items()))
-        abbreviations = abbreviations[abbreviations[:, 0].argsort()[::-1]]
-        self.abbreviations = abbreviations
 
-        output = pd.DataFrame({'abbreviation': abbreviations[:,0], 'full_text': abbreviations[:,1]})
-        output.to_excel(preproc_dir / 'sortedabbriviations.xlsx')
+# Расширяет аббревиатуры
+# Для работы нужна таблица аббревиатур /text_info/abbriviations.xlsx
+class AbbrExpandAlgorithm(ProcessingAlgorithm):
+    def __init__(self, preproc_dir: Path, abbreviations = None):
+        super().__init__()
+        if abbreviations is None:
+            # reading abbreviations
+            abbreviations = pd.read_excel(preproc_dir / 'abbriviations.xlsx').to_numpy()
+            abbreviations = dict(abbreviations[:, 1:3].tolist())
+            for key, val in list(abbreviations.items()):
+                new_key = ''.join(key.split())
+                abbreviations[new_key] = val
+                new_key = ''.join(map(lambda s: s + '.', key.split()))
+                abbreviations[new_key] = val
+                new_key = ' '.join(map(lambda s: s + '.', key.split()))
+                abbreviations[new_key] = val
+            abbreviations = np.array(list(abbreviations.items()))
+            abbreviations = abbreviations[abbreviations[:, 0].argsort()[::-1]]
+            self.abbreviations = abbreviations
+
+            # output = pd.DataFrame({'abbreviation': abbreviations[:,0], 'full_text': abbreviations[:,1]})
+            # output.to_excel(preproc_dir / 'sortedabbriviations.xlsx')
+        else:
+            self.abbreviations = abbreviations
 
     def process_text(self, text: str) -> str:
         for pair in self.abbreviations:
@@ -49,6 +55,7 @@ class AbbrExpandAlgorithm(ProcessingAlgorithm):
             text = text.replace('\n' + pair[0] + '\n', '\n' + pair[1] + '\n')
         return text
 
+# Приводит цифры в более удобный формат
 class NumsProcAlgorithm(ProcessingAlgorithm):
     def __init__(self):
         super().__init__()

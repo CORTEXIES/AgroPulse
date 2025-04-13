@@ -1,1 +1,6 @@
 /output.txt/
+/results/
+/saved/
+/scripts/helpers/__pycache__/
+/scripts/model/__pycache__/
+/data/~*
