@@ -23,7 +23,7 @@ class LowerAlgorithm(ProcessingAlgorithm):
 # Расширяет аббревиатуры
 # Для работы нужна таблица аббревиатур /text_info/abbriviations.xlsx
 class AbbrExpandAlgorithm(ProcessingAlgorithm):
-    def __init__(self, preproc_dir: Path, abbreviations = None):
+    def __init__(self, preproc_dir: Path = None, abbreviations = None):
         super().__init__()
         if abbreviations is None:
             # reading abbreviations

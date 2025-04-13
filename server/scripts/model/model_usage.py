@@ -55,3 +55,47 @@ def predict_labels(texts):
         all_labels.append(labels)
 
     return all_labels
+
+def convert_labels_to_output(text, labels):
+    tokens = list(text.split())
+    result = []
+    out_per_it = dict()
+
+    if len(labels) > len(tokens):
+        raise ValueError("Why more labels then words? It's impossible in this implementation! HOW?!") 
+    
+    last_saved = True
+    prev_label = None
+    for i in range(len(tokens)):
+        label = labels[i]
+        if label == 'O':
+            continue
+        label = label[2:]
+        if out_per_it.get(label, None):
+            if prev_label == None or prev_label == label:
+                out_per_it[label] += " " + tokens[i]
+                last_saved = False
+            else:
+                result.append(out_per_it)
+                out_per_it = dict()
+                last_saved = True
+        else:
+            out_per_it[label] = tokens[i]
+            last_saved = False
+        prev_label = label
+
+    if not last_saved:
+        result.append(out_per_it)
+
+    return result
+
+
+def convert_multiple_labels_to_output(texts, labels_list):
+    if len(texts) != len(labels_list):
+        raise ValueError("Length of texts and list of labels are NOT equal!")
+    
+    result = []
+    for i in range(len(texts)):
+        result.append(convert_labels_to_output(texts[i], labels_list[i]))
+
+    return result

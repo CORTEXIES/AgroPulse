@@ -3,7 +3,7 @@ from scripts.ProcessingAlgorithms.texthandler import TextHandler
 from scripts.helpers.helpers import generate_unique_words, generate_abbreviations, transform_labels
 from scripts.helpers.xlsx_saver_reader import save_postproc_data_table, read_data_with_labels, transform_xlsx_into_csv, save_data_with_transformed_labels
 from scripts.model.model import prepare_train_save_model
-from scripts.model.model_usage import predict_labels
+from scripts.model.model_usage import predict_labels, convert_multiple_labels_to_output
 from scripts.model.model_precision import print_precision_scores
 from pathlib import Path
 import pandas as pd
@@ -32,6 +32,27 @@ def proc_labled_data(data_dir):
 
     save_data_with_transformed_labels(data_with_labels, data_dir)
 
+def process_texts(texts, abbreviations = None):
+    if abbreviations is None:
+        abbreviations = generate_abbreviations(Path('./text_info'), generate_sorted_abbreviations=False)
+
+    text_handler = TextHandler()
+
+    text_handler.add_algorithm(LowerAlgorithm())
+    text_handler.add_algorithm(AbbrExpandAlgorithm(abbreviations=abbreviations))
+    text_handler.add_algorithm(NumsProcAlgorithm())
+
+    for i in range(len(texts)):
+        texts[i] = text_handler.process_text(texts[i])
+    
+    del text_handler
+
+    labels_list = predict_labels(texts)
+    outputs = convert_multiple_labels_to_output(texts, labels_list)
+    return outputs
+
+
+
 def main():
     # 1. Получение информации
     root = Path('.')
@@ -53,9 +74,9 @@ def main():
     # proc_labled_data(data_dir)
 
     # 5. получение готовой модели
-    prepare_train_save_model(data_dir)
+    # prepare_train_save_model(data_dir)
 
-    # 6. Применение готовой модели
+    # 6. Применение готовой модели к предобработанным данным
 #     texts = ["""пахота зяби под многолетние травы
 # по пу площадь за день 26 площадь с начала операции 514
 # отделение 12 площадь за день 26 площадь с начала операции 247
@@ -80,12 +101,32 @@ def main():
 # по пу площадь за день 82 площадь с начала операции 1989
 # отделение 11 площадь за день 82 площадь с начала операции 993"""]
 
-#     labels = predict_labels(texts)
-#     print(labels)
+#     labels_list = predict_labels(texts)
+#     outputs = convert_multiple_labels_to_output(texts, labels_list)
+#     print(outputs)
 
     # 7. Проверка точности
-    print_precision_scores(data_dir)
+    # print_precision_scores(data_dir)
 
+    # 8. Применение готовой модели с совместной обработкой данных
+    texts = ["""Пахота зяби под мн тр
+По Пу 26/488
+Отд 12 26/221
 
+Предп культ под оз пш
+По Пу 215/1015
+Отд 12 128/317
+Отд 16 123/529
+
+2-е диск сах св под пш
+По Пу 22/627
+Отд 11 22/217
+
+2-е диск сои под оз пш
+По Пу 45/1907
+Отд 12 45/299"""]
+    
+    outputs = process_texts(texts)
+    print(outputs)
 
 main()
