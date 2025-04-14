@@ -53,17 +53,17 @@ def train_model(tokenized_data):
 
     # Определение аргументов обучения
     training_args = TrainingArguments(
-        lr_scheduler_type="cosine",
+        lr_scheduler_type="linear",
         output_dir="./results",
         eval_strategy="epoch",
         logging_strategy="epoch",
         save_strategy="epoch",
-        learning_rate=2e-5,
-        warmup_steps=500,
-        per_device_train_batch_size=32,
-        per_device_eval_batch_size=32,
+        learning_rate=1e-5,
+        # warmup_steps=500,
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
         num_train_epochs=120,
-        weight_decay=0.1,
+        weight_decay=0.01,
         save_total_limit=5,
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss"
@@ -139,7 +139,7 @@ def tokenize_and_align_labels(data, tokenizer):
         data["postproc_data"].tolist(),
         truncation=True,
         padding='max_length',
-        max_length=250,
+        max_length=300,
         is_split_into_words=False, 
         return_tensors="pt",
     )

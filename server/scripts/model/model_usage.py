@@ -14,7 +14,7 @@ def predict_labels(texts):
         truncation=True,
         padding="max_length",
         is_split_into_words=False,
-        max_length=250,
+        max_length=300,
         return_tensors="pt"
     )
 
