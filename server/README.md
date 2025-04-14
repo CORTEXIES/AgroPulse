@@ -13,3 +13,11 @@ python -m venv .\.venv\
 ```bash
 fastapi dev run_server.py
 ```
+
+# Создание меток на данных
+
+Можно это делать при помощи Label Studio
+
+```bash
+label-studio start
+```
