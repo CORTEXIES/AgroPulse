@@ -1,3 +1,4 @@
+from typing import override
 from fastapi import FastAPI
 from pydantic import BaseModel
 import random
@@ -30,7 +31,7 @@ async def process_messages(messages: list[AgroMessage]):
             data=datetime.now(),
             department=f"Имя пользователя: {m.senderName}",
             operation=f"Telegram id: {m.telegramId}",
-            plant=f"Полученное сообщение: {m.text}",
+            plant=f"SOME PLANT",
             perDay=random.randint(1, 100000),
             perOperation=random.randint(1, 100000),
             grosPerDay=random.randint(1, 100000),

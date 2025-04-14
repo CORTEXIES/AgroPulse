@@ -20,5 +20,7 @@ target/
 .idea
 .git
 
+reports/
+
 # server
 /server/__pycache__/

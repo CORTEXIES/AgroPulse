@@ -2,15 +2,49 @@ spring:
   config:
     import: optional:file:.env[.properties]
 
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
 bot:
   name: ${BOT_NAME}
   token: ${BOT_TOKEN}
-  request_delay: ${MESSAGE_RECORDING_DELAY}
+  request_delay: ${REQUEST_DELAY}
   command:
     prefix: ${COMMAND_PREFIX}
     get_report: ${COMMAND_GET_REPORT}
+    title:
+      no_new_messages: Нет новых сообщений для формирования отчёта.
 
+excel:
+  relative_path: ${RELATIVE_EXCEL_PATH}
+  file_prefix: Отчёт_за_
+  columns_config: >-
+    {
+      "0": "Дата",
+      "1": "Подразделения",
+      "2": "Операция",
+      "3": "Культура",
+      "4": "За день, га",
+      "5": "С начала операции, га",
+      "6": "Вал за день, ц",
+      "7": "Вал с начала, ц"
+    }
+  date_time_pattern: ${DATE_TIME_PATTERN}
 
 proxy:
   post:
     url: ${POST_URL}
+
+logging:
+  level:
+    org.apache.catalina: warn
+    org.apache.coyote: warn
+    org.apache: warn

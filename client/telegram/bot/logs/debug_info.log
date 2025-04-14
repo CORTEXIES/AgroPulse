@@ -1,0 +1,305 @@
+2025/04/14 [10:08:20] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 11003 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [10:08:20] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [10:08:20] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [10:08:21] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 38 ms. Found 1 JPA repository interface.
+2025/04/14 [10:08:21] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [10:08:21] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 897 ms
+2025/04/14 [10:08:21] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [10:08:21] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [10:08:21] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [10:08:21] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [10:08:21] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [10:08:21] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6cc8adff
+2025/04/14 [10:08:21] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [10:08:22] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [10:08:22] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [10:08:22] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:08:22] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [10:08:24] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [10:08:24] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [10:08:24] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [10:08:24] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 4.361 seconds (process running for 5.078)
+2025/04/14 [10:14:03] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@5c4057d1, com.github.cortex.classification.server_dto.MessageClassification@3d23cdb3, com.github.cortex.classification.server_dto.MessageClassification@836b197, com.github.cortex.classification.server_dto.MessageClassification@10ffcfe9]
+2025/04/14 [10:15:13] [INFO] [SpringApplicationShutdownHook] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Commencing graceful shutdown. Waiting for active requests to complete
+2025/04/14 [10:15:13] [INFO] [tomcat-shutdown] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Graceful shutdown complete
+2025/04/14 [10:15:13] [INFO] [SpringApplicationShutdownHook] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Closing JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:15:13] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown initiated...
+2025/04/14 [10:15:13] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown completed.
+2025/04/14 [10:15:16] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 12864 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [10:15:16] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [10:15:17] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [10:15:17] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 34 ms. Found 1 JPA repository interface.
+2025/04/14 [10:15:17] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [10:15:17] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 795 ms
+2025/04/14 [10:15:17] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [10:15:17] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [10:15:17] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [10:15:17] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [10:15:17] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [10:15:17] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1ad1b737
+2025/04/14 [10:15:17] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [10:15:17] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [10:15:18] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [10:15:18] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:15:18] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [10:15:20] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [10:15:20] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [10:15:20] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [10:15:20] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 3.964 seconds (process running for 4.635)
+2025/04/14 [10:17:29] [INFO] [SpringApplicationShutdownHook] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Commencing graceful shutdown. Waiting for active requests to complete
+2025/04/14 [10:17:29] [INFO] [tomcat-shutdown] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Graceful shutdown complete
+2025/04/14 [10:17:29] [INFO] [SpringApplicationShutdownHook] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Closing JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:17:29] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown initiated...
+2025/04/14 [10:17:29] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown completed.
+2025/04/14 [10:17:32] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 13163 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [10:17:32] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [10:17:32] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [10:17:32] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 33 ms. Found 1 JPA repository interface.
+2025/04/14 [10:17:33] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [10:17:33] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 771 ms
+2025/04/14 [10:17:33] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [10:17:33] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [10:17:33] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [10:17:33] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [10:17:33] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [10:17:33] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3cbfdf5c
+2025/04/14 [10:17:33] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [10:17:33] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [10:17:34] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [10:17:34] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:17:34] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [10:17:35] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [10:17:35] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [10:17:36] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [10:17:36] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 3.781 seconds (process running for 4.532)
+2025/04/14 [10:18:14] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@6bbb6ac0, com.github.cortex.classification.server_dto.MessageClassification@33ace7d1]
+2025/04/14 [10:21:56] [INFO] [SpringApplicationShutdownHook] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Commencing graceful shutdown. Waiting for active requests to complete
+2025/04/14 [10:21:56] [INFO] [tomcat-shutdown] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Graceful shutdown complete
+2025/04/14 [10:21:56] [INFO] [SpringApplicationShutdownHook] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Closing JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:21:56] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown initiated...
+2025/04/14 [10:21:56] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown completed.
+2025/04/14 [10:28:19] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 15286 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [10:28:19] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [10:28:19] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [10:28:19] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 38 ms. Found 1 JPA repository interface.
+2025/04/14 [10:28:20] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [10:28:20] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 911 ms
+2025/04/14 [10:28:20] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [10:28:20] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [10:28:20] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [10:28:20] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [10:28:20] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [10:28:20] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@210635fd
+2025/04/14 [10:28:20] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [10:28:21] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [10:28:21] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [10:28:21] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:28:21] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [10:28:23] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [10:28:23] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [10:28:23] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [10:28:23] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 4.285 seconds (process running for 5.21)
+2025/04/14 [10:29:02] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@68c6e8f2]
+2025/04/14 [10:29:59] [INFO] [SpringApplicationShutdownHook] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Commencing graceful shutdown. Waiting for active requests to complete
+2025/04/14 [10:29:59] [INFO] [tomcat-shutdown] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Graceful shutdown complete
+2025/04/14 [10:29:59] [INFO] [SpringApplicationShutdownHook] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Closing JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:29:59] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown initiated...
+2025/04/14 [10:29:59] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown completed.
+2025/04/14 [10:41:57] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 16958 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [10:41:57] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [10:41:57] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [10:41:57] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 36 ms. Found 1 JPA repository interface.
+2025/04/14 [10:41:57] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [10:41:58] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 912 ms
+2025/04/14 [10:41:58] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [10:41:58] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [10:41:58] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [10:41:58] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [10:41:58] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [10:41:58] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7d7b4e04
+2025/04/14 [10:41:58] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [10:41:58] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [10:41:59] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [10:41:59] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [10:41:59] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [10:42:00] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [10:42:00] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [10:42:01] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [10:42:01] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 4.298 seconds (process running for 5.075)
+2025/04/14 [10:42:39] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@4aa538ab]
+2025/04/14 [12:05:54] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 5877 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [12:05:54] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [12:05:54] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [12:05:54] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 47 ms. Found 1 JPA repository interface.
+2025/04/14 [12:05:54] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [12:05:55] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 877 ms
+2025/04/14 [12:05:55] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [12:05:55] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [12:05:55] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [12:05:55] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [12:05:55] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [12:05:55] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@58636b50
+2025/04/14 [12:05:55] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [12:05:55] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [12:05:56] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [12:05:56] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [12:05:56] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [12:05:57] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [12:05:57] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [12:05:57] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [12:05:57] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 4.132 seconds (process running for 6.59)
+2025/04/14 [12:06:56] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@6da931f8]
+2025/04/14 [12:15:17] [INFO] [SpringApplicationShutdownHook] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Commencing graceful shutdown. Waiting for active requests to complete
+2025/04/14 [12:15:17] [INFO] [tomcat-shutdown] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Graceful shutdown complete
+2025/04/14 [12:15:17] [INFO] [SpringApplicationShutdownHook] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Closing JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [12:15:17] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown initiated...
+2025/04/14 [12:15:17] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown completed.
+2025/04/14 [12:15:20] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 7245 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [12:15:20] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [12:15:21] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [12:15:21] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 42 ms. Found 1 JPA repository interface.
+2025/04/14 [12:15:21] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [12:15:21] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 928 ms
+2025/04/14 [12:15:22] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [12:15:22] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [12:15:22] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [12:15:22] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [12:15:22] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [12:15:22] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3cb195dd
+2025/04/14 [12:15:22] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [12:15:22] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [12:15:23] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [12:15:23] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [12:15:23] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [12:15:24] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [12:15:24] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [12:15:24] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [12:15:24] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 4.156 seconds (process running for 4.937)
+2025/04/14 [12:15:43] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@7f881716]
+2025/04/14 [12:17:03] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@224d8bdc, com.github.cortex.classification.server_dto.MessageClassification@270d2a0f, com.github.cortex.classification.server_dto.MessageClassification@41101186, com.github.cortex.classification.server_dto.MessageClassification@73dbbb6f, com.github.cortex.classification.server_dto.MessageClassification@3d86cda3, com.github.cortex.classification.server_dto.MessageClassification@7315c54e, com.github.cortex.classification.server_dto.MessageClassification@32c8668b, com.github.cortex.classification.server_dto.MessageClassification@1c66b37e, com.github.cortex.classification.server_dto.MessageClassification@17868e84]
+2025/04/14 [12:24:04] [INFO] [SpringApplicationShutdownHook] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Commencing graceful shutdown. Waiting for active requests to complete
+2025/04/14 [12:24:04] [INFO] [tomcat-shutdown] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Graceful shutdown complete
+2025/04/14 [12:24:04] [INFO] [SpringApplicationShutdownHook] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Closing JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [12:24:04] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown initiated...
+2025/04/14 [12:24:04] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown completed.
+2025/04/14 [12:24:08] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 7997 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [12:24:08] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [12:24:08] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [12:24:08] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 35 ms. Found 1 JPA repository interface.
+2025/04/14 [12:24:08] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [12:24:08] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 844 ms
+2025/04/14 [12:24:09] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [12:24:09] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [12:24:09] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [12:24:09] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [12:24:09] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [12:24:09] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@210635fd
+2025/04/14 [12:24:09] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [12:24:09] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [12:24:09] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [12:24:10] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [12:24:10] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [12:24:11] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [12:24:11] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [12:24:11] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [12:24:11] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 4.007 seconds (process running for 4.8)
+2025/04/14 [12:24:30] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@6103c176, com.github.cortex.classification.server_dto.MessageClassification@44a99c73, com.github.cortex.classification.server_dto.MessageClassification@2a51aa8c, com.github.cortex.classification.server_dto.MessageClassification@7cf34bd6, com.github.cortex.classification.server_dto.MessageClassification@3043d4f, com.github.cortex.classification.server_dto.MessageClassification@b466358]
+2025/04/14 [12:27:22] [INFO] [SpringApplicationShutdownHook] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Commencing graceful shutdown. Waiting for active requests to complete
+2025/04/14 [12:27:22] [INFO] [tomcat-shutdown] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Graceful shutdown complete
+2025/04/14 [12:27:22] [INFO] [SpringApplicationShutdownHook] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Closing JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [12:27:22] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown initiated...
+2025/04/14 [12:27:22] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown completed.
+2025/04/14 [12:27:25] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Starting Application using Java 24 with PID 8962 (/home/kegszool/Projects/AgroPulse/client/telegram/bot/target/classes started by kegszool in /home/kegszool/Projects/AgroPulse/client/telegram/bot)
+2025/04/14 [12:27:25] [INFO] [main] org.springframework.boot.SpringApplication --> No active profile set, falling back to 1 default profile: "default"
+2025/04/14 [12:27:26] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025/04/14 [12:27:26] [INFO] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate --> Finished Spring Data repository scanning in 36 ms. Found 1 JPA repository interface.
+2025/04/14 [12:27:26] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat initialized with port 8080 (http)
+2025/04/14 [12:27:26] [INFO] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> Root WebApplicationContext: initialization completed in 871 ms
+2025/04/14 [12:27:26] [INFO] [main] org.hibernate.jpa.internal.util.LogHelper --> HHH000204: Processing PersistenceUnitInfo [name: default]
+2025/04/14 [12:27:27] [INFO] [main] org.hibernate.Version --> HHH000412: Hibernate ORM core version 6.6.2.Final
+2025/04/14 [12:27:27] [INFO] [main] org.hibernate.cache.internal.RegionFactoryInitiator --> HHH000026: Second-level cache disabled
+2025/04/14 [12:27:27] [INFO] [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> No LoadTimeWeaver setup: ignoring JPA class transformer
+2025/04/14 [12:27:27] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Starting...
+2025/04/14 [12:27:27] [INFO] [main] com.zaxxer.hikari.pool.HikariPool --> HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3cb195dd
+2025/04/14 [12:27:27] [INFO] [main] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Start completed.
+2025/04/14 [12:27:27] [INFO] [main] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator --> HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025/04/14 [12:27:28] [INFO] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025/04/14 [12:27:28] [INFO] [main] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [12:27:28] [INFO] [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory --> Hibernate is in classpath; If applicable, HQL parser will be used.
+2025/04/14 [12:27:29] [INFO] [main] org.telegram.telegrambots.longpolling.BotSession --> Result when calling deleteWebhook: true
+2025/04/14 [12:27:29] [INFO] [main] com.github.cortex.telegram.BotRegistrationService --> Successful registration of the bot. Bot token: 7238919549:AAFpnjAaLiWyGScljgxv4a6nzj17SPIedBA
+2025/04/14 [12:27:29] [INFO] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> Tomcat started on port 8080 (http) with context path '/'
+2025/04/14 [12:27:29] [INFO] [main] org.springframework.boot.StartupInfoLogger --> Started Application in 4.125 seconds (process running for 4.996)
+2025/04/14 [12:27:48] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@1148ab76, com.github.cortex.classification.server_dto.MessageClassification@7ed3984f, com.github.cortex.classification.server_dto.MessageClassification@a0ef91c]
+2025/04/14 [12:28:08] [INFO] [pool-2-thread-1] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@454173f8]
+2025/04/14 [12:28:50] [INFO] [SpringApplicationShutdownHook] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Commencing graceful shutdown. Waiting for active requests to complete
+2025/04/14 [12:28:50] [INFO] [tomcat-shutdown] org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> Graceful shutdown complete
+2025/04/14 [12:28:50] [INFO] [SpringApplicationShutdownHook] org.springframework.orm.jpa.AbstractEntityManagerFactoryBean --> Closing JPA EntityManagerFactory for persistence unit 'default'
+2025/04/14 [12:28:50] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown initiated...
+2025/04/14 [12:28:50] [INFO] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource --> HikariPool-1 - Shutdown completed.
+2025/04/14 [14:43:44] [INFO] [main] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@ad9e63e]
+2025/04/14 [14:57:35] [INFO] [main] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@66420549]
+2025/04/14 [14:59:28] [INFO] [main] com.github.cortex.classification.service.MessageClassificationExchangeClient --> Classified messages received: [com.github.cortex.classification.server_dto.MessageClassification@2c8662ac]
