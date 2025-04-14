@@ -1,7 +1,8 @@
-from transformers import BertTokenizerFast, BertForTokenClassification
-from transformers import Trainer, TrainingArguments
+from transformers import BertTokenizerFast, BertForTokenClassification, BertConfig
+from transformers import Trainer, TrainingArguments, EarlyStoppingCallback
 import pandas as pd
 import numpy as np
+from transformers import TrainerCallback
 from sklearn.model_selection import train_test_split
 from datasets import Dataset
 
@@ -17,39 +18,70 @@ def get_id_to_label():
 def download_pretrained_model():
     print("Загрузка предобученной модели по сети")
     tokenizer = BertTokenizerFast.from_pretrained("DeepPavlov/rubert-base-cased")
+    config = BertConfig.from_pretrained("DeepPavlov/rubert-base-cased")
+    config.hidden_dropout_prob = 0.3  # Увеличенный dropout
+    config.num_labels=len(label_list)
     model = BertForTokenClassification.from_pretrained(
         "DeepPavlov/rubert-base-cased",
-        num_labels=len(label_list)
+        config=config,
     )
     return tokenizer, model
 
+class DualEvalCallback(TrainerCallback):
+    def __init__(self, trainer):
+        self.trainer = trainer
+
+    def on_epoch_end(self, args, state, control, **kwargs):
+        # Оценка на тренировочных данных
+        train_metrics = self.trainer.evaluate(
+            eval_dataset=self.trainer.train_dataset,
+            metric_key_prefix="train"
+        )
+        
+        # Оценка на валидационных данных (уже выполнена Trainer'ом)
+        eval_metrics = kwargs.get("metrics", {})
+        
+        print(f"\nEpoch {state.epoch}:")
+        print(f"  Train Loss: {train_metrics.get('train_loss', 'N/A')}")
+        print(f"  Valid Loss: {eval_metrics.get('eval_loss', 'N/A')}")
+
 # Обучение модели
 def train_model(tokenized_data):
+
     print("Обучение модели")
     tokenizer, model = download_pretrained_model()
 
     # Определение аргументов обучения
     training_args = TrainingArguments(
-        lr_scheduler_type="linear",
+        lr_scheduler_type="cosine",
         output_dir="./results",
         eval_strategy="epoch",
+        logging_strategy="epoch",
+        save_strategy="epoch",
         learning_rate=1e-5,
+        warmup_steps=500,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
-        num_train_epochs=120,
-        weight_decay=0.01,
+        num_train_epochs=80,
+        weight_decay=0.1,
+        save_total_limit=5,
+        load_best_model_at_end=True,
+        metric_for_best_model="eval_loss"
     )
 
     # Создание объекта Trainer
-    print(f"Тип tokenized_data['train']: {type(tokenized_data['train'])}")
-    print(f"Тип tokenized_data['validation']: {type(tokenized_data['validation'])}")
+    # print(f"Тип tokenized_data['train']: {type(tokenized_data['train'])}")
+    # print(f"Тип tokenized_data['validation']: {type(tokenized_data['validation'])}")
     trainer = Trainer(
         model=model,
         args=training_args,
         train_dataset=tokenized_data["train"],
         eval_dataset=tokenized_data["validation"],
         tokenizer=tokenizer,
+        callbacks=[EarlyStoppingCallback(early_stopping_patience=4)]
     )
+
+    # trainer.add_callback(DualEvalCallback(trainer))
 
     # Обучение модели
     trainer.train()
@@ -107,7 +139,7 @@ def tokenize_and_align_labels(data, tokenizer):
         data["postproc_data"].tolist(),
         truncation=True,
         padding='max_length',
-        max_length=300,
+        max_length=250,
         is_split_into_words=False, 
         return_tensors="pt",
     )

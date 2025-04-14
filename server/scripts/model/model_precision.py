@@ -24,4 +24,5 @@ def print_precision_scores(data_dir):
     print(f"Полнота: {recall}")
     print(f"F1-score: {f1}")
 
-    print(predicted)
+    print("Примеры ответов:")
+    print(predicted[:3])
