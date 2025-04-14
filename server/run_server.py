@@ -39,14 +39,12 @@ async def process_messages(messages: list[AgroMessage]):
 
     responses = []
     for output in outputs:
-        print(f'Переработанное сообщение: {output}')
-        response = []
         for dict in output:
             department = ''
             if 'department' in dict:
                 department = 'АОР' if 'отд' in dict['department'] else dict['department']
 
-            response.append(MessageClassification(
+            responses.append(MessageClassification(
                 data = dict.get('data', str(datetime.now())),
                 department = department,
                 operation = dict.get('operation', ''),
@@ -56,7 +54,6 @@ async def process_messages(messages: list[AgroMessage]):
                 grosPerDay = parse_int(dict.get('grosPerDay', '')),
                 grosPerOperation = parse_int(dict.get('grosPerOperation', '')),
             ))
-        responses.append(response)
     
     
     return {"response": responses}
