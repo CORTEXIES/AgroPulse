@@ -58,11 +58,11 @@ def train_model(tokenized_data):
         eval_strategy="epoch",
         logging_strategy="epoch",
         save_strategy="epoch",
-        learning_rate=1e-5,
+        learning_rate=2e-5,
         warmup_steps=500,
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
-        num_train_epochs=80,
+        per_device_train_batch_size=32,
+        per_device_eval_batch_size=32,
+        num_train_epochs=120,
         weight_decay=0.1,
         save_total_limit=5,
         load_best_model_at_end=True,
@@ -78,7 +78,7 @@ def train_model(tokenized_data):
         train_dataset=tokenized_data["train"],
         eval_dataset=tokenized_data["validation"],
         tokenizer=tokenizer,
-        callbacks=[EarlyStoppingCallback(early_stopping_patience=4)]
+        # callbacks=[EarlyStoppingCallback(early_stopping_patience=4)]
     )
 
     # trainer.add_callback(DualEvalCallback(trainer))
