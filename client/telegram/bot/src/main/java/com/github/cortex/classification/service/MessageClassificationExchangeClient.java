@@ -6,12 +6,12 @@ import com.github.cortex.classification.server_dto.MessageClassification;
 import com.github.cortex.classification.server_dto.MessageClassificationResponse;
 import com.github.cortex.exception.classifiaction.MessageClassificationExchangeException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.RestClientException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Collections;

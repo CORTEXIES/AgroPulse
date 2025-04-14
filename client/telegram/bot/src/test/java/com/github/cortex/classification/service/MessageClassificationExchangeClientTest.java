@@ -1,10 +1,5 @@
 package com.github.cortex.classification.service;
 
-import com.github.cortex.agro.AgroMessage;
-import com.github.cortex.classification.server_dto.MessageClassification;
-import com.github.cortex.classification.server_dto.MessageClassificationResponse;
-import com.github.cortex.exception.classifiaction.MessageClassificationExchangeException;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -13,8 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDateTime;
+import com.github.cortex.agro.AgroMessage;
+import com.github.cortex.classification.server_dto.MessageClassification;
+import com.github.cortex.classification.server_dto.MessageClassificationResponse;
+import com.github.cortex.exception.classifiaction.MessageClassificationExchangeException;
+
 import java.util.List;
+import java.time.LocalDateTime;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
