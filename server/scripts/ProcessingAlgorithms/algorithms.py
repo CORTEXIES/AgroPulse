@@ -48,7 +48,7 @@ class AbbrExpandAlgorithm(ProcessingAlgorithm):
     def process_text(self, text: str) -> str:
         for pair in self.abbreviations:
             if text.startswith(pair[0] + ' '):
-                text.replace(pair[0] + ' ', pair[1] + ' ', 1)
+                text = text.replace(pair[0] + ' ', pair[1] + ' ', 1)
             text = text.replace(' ' + pair[0] + ' ', ' ' + pair[1] + ' ')
             text = text.replace(' ' + pair[0] + '\n', ' ' + pair[1] + '\n')
             text = text.replace('\n' + pair[0] + ' ', '\n' + pair[1] + ' ')
@@ -85,6 +85,8 @@ class SpellCheckAlgorithm(ProcessingAlgorithm):
         self.sym_spell.create_dictionary(str(dictionary_file))
 
     def process_text(self, text: str) -> str:
+        # Удаляем лишние символы
+        text = re.sub(r'[^a-zA-Zа-яА-ЯёЁ0-9/.\s-]', '', text)
         correct_lines = []
         for line in text.split('\n'):
             correct_words = []
