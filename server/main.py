@@ -74,7 +74,7 @@ def main():
     # proc_labled_data(data_dir)
 
     # 5. Получение готовой модели
-    prepare_train_save_model(data_dir)
+    # prepare_train_save_model(data_dir)
 
     # 6. Применение готовой модели к предобработанным данным
 #     texts = ["""пахота зяби под многолетние травы
@@ -106,7 +106,7 @@ def main():
 #     print(outputs)
 
     # 7. Проверка точности
-    print_precision_scores(data_dir)
+    # print_precision_scores(data_dir)
 
     # 8. Применение готовой модели с совместной обработкой данных
 #     texts = ["""Пахота зяби под мн тр

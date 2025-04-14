@@ -62,7 +62,7 @@ def train_model(tokenized_data):
         # warmup_steps=500,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
-        num_train_epochs=120,
+        num_train_epochs=80,
         weight_decay=0.01,
         save_total_limit=5,
         load_best_model_at_end=True,
