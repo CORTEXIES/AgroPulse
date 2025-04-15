@@ -1,9 +1,4 @@
-### WHATSAPP ###
-
-*/whatsapp/node_modules/
-*/whatsapp/.wwebjs_cache/
-
-### TELEGRAM ###
+### IDEA ###
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -16,15 +11,15 @@ target/
 *.iws
 *.iml
 *.ipr
-*.env
 .idea
-.git
 
+### env files ###
+
+.git
 *.log
 *.log.gz
-*.xlsx
-
-reports/
+*.env
+client/bot/logs/
 
 # server
 /server/__pycache__/
