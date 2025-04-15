@@ -2,7 +2,7 @@ package com.github.cortex.excel;
 
 import org.junit.jupiter.api.Test;
 import com.github.cortex.exception.excel.ExcelTitleConfigParsingException;
-import com.github.cortex.classification.server_dto.MessageClassification;
+import com.github.cortex.classification.dto.MessageClassification;
 
 import java.io.File;
 import java.util.List;

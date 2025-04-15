@@ -1,11 +1,12 @@
 package com.github.cortex.classification.service;
 
-import com.github.cortex.agro.AgroMessage;
-import com.github.cortex.agro.AgroMessageUtils;
-import com.github.cortex.classification.server_dto.MessageClassification;
-import com.github.cortex.classification.server_dto.MessageClassificationResponse;
+import com.github.cortex.agro.dto.AgroMessage;
+import com.github.cortex.agro.utils.AgroMessageUtils;
+import com.github.cortex.classification.dto.MessageClassification;
+import com.github.cortex.classification.dto.MessageClassificationResponse;
 import com.github.cortex.exception.classifiaction.MessageClassificationExchangeException;
 
+import com.github.cortex.message.MessageBuffer;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,8 +23,9 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class MessageClassificationExchangeClient {
 
-    private final RestTemplate restTemplate;
     private final String postUrl;
+    private final RestTemplate restTemplate;
+
 
     @Autowired
     public MessageClassificationExchangeClient(
@@ -34,7 +36,7 @@ public class MessageClassificationExchangeClient {
         this.postUrl = postUrl;
     }
 
-    public List<MessageClassification> executeClassification(List<AgroMessage> agroMessages) {
+    public List<MessageClassification> executeClassification(List<AgroMessage> agroMessages) throws MessageClassificationExchangeException {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

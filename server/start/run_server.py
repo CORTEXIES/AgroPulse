@@ -8,14 +8,16 @@ abbreviations = generate_abbreviations(Path('./text_info'), generate_sorted_abbr
 
 app = FastAPI()
 
-class AgroMessage(BaseModel):
-    senderName: str
+class Agronomist(BaseModel):
+    fullName: str
     telegramId: str
+
+class AgroMessage(BaseModel):
+    agronomist: Agronomist
     text: str
 
-
 class MessageClassification(BaseModel):
-    data: str
+    data: datetime
     department: str
     operation: str
     plant: str
@@ -29,7 +31,6 @@ def parse_int(string):
         return int(string)
     except ValueError:
         return 0
-    
 
 @app.post("/messages/proc_many")
 async def process_messages(messages: list[AgroMessage]):
@@ -44,7 +45,7 @@ async def process_messages(messages: list[AgroMessage]):
                 department = 'АОР' if 'отд' in dict['department'] else dict['department']
 
             responses.append(MessageClassification(
-                data = dict.get('data', str(datetime.now())),
+                data = dict.get('data', datetime.now()),
                 department = department,
                 operation = dict.get('operation', ''),
                 plant = dict.get('plant', ''),

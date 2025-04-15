@@ -7,4 +7,4 @@
 /archived_models/
 /__pycache__/
 *.pyc
-server/start/saved
+saved/

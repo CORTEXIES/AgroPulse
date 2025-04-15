@@ -1,4 +1,4 @@
-package com.github.cortex.classification.database.dto;
+package com.github.cortex.database.dto.classifcation;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,8 +29,8 @@ public class MessageClassificationEntity {
     private int grosPerDay;
     private int grosPerOperation;
 
-    @Enumerated
-    private Status status = Status.NEW;
+    @Enumerated(EnumType.STRING)
+    private ClassificationStatus classificationStatus = ClassificationStatus.NEW;
 
     public MessageClassificationEntity(
             LocalDateTime date,

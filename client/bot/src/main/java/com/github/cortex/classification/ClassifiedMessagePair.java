@@ -1,7 +1,7 @@
 package com.github.cortex.classification;
 
-import com.github.cortex.classification.server_dto.MessageClassification;
-import com.github.cortex.classification.database.dto.MessageClassificationEntity;
+import com.github.cortex.classification.dto.MessageClassification;
+import com.github.cortex.database.dto.classifcation.MessageClassificationEntity;
 
 
 public record ClassifiedMessagePair (

@@ -1,11 +1,11 @@
 package com.github.cortex.classification.utils;
 
 import com.github.cortex.classification.ClassifiedMessagePair;
-import com.github.cortex.classification.database.MessageClassificationRepository;
-import com.github.cortex.classification.database.dto.MessageClassificationEntity;
-import com.github.cortex.classification.database.dto.Status;
-import com.github.cortex.classification.database.mapper.EntityMapper;
-import com.github.cortex.classification.server_dto.MessageClassification;
+import com.github.cortex.database.repository.MessageClassificationRepository;
+import com.github.cortex.database.dto.classifcation.MessageClassificationEntity;
+import com.github.cortex.database.dto.classifcation.ClassificationStatus;
+import com.github.cortex.database.mapper.EntityMapper;
+import com.github.cortex.classification.dto.MessageClassification;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class MessageClassificationFetcher {
     }
 
     public List<ClassifiedMessagePair> fetchNewMessages() {
-        return messageClassificationRepository.findByStatus(Status.NEW).stream()
+        return messageClassificationRepository.findByClassificationStatus(ClassificationStatus.NEW).stream()
                 .map(entity -> new ClassifiedMessagePair(
                         entity, messageClassificationEntityMapper.toDto(entity)
                 ))

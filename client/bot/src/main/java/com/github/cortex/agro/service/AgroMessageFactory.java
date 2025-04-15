@@ -1,5 +1,7 @@
-package com.github.cortex.agro;
+package com.github.cortex.agro.service;
 
+import com.github.cortex.agro.dto.AgroMessage;
+import com.github.cortex.agro.dto.Agronomist;
 import com.github.cortex.message.MessageBuffer;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,11 @@ public class AgroMessageFactory {
 
     private AgroMessage create(Message msg) {
         User consumer = msg.getFrom();
-        String sender = consumer.getFirstName();
+        String fullName = consumer.getFirstName();
         if (consumer.getLastName() != "null") {
-        	sender = String.format("%s %s", consumer.getFirstName(), consumer.getLastName());
+        	fullName = String.format("%s %s", consumer.getFirstName(), consumer.getLastName());
         }
-        return new AgroMessage(sender, consumer.getId().toString(), msg.getText());
+        Agronomist agronomist = new Agronomist(fullName, consumer.getId().toString());
+        return new AgroMessage(agronomist, msg.getText());
     }
 }

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 
 import lombok.extern.log4j.Log4j2;
-import com.github.cortex.classification.server_dto.MessageClassification;
+import com.github.cortex.classification.dto.MessageClassification;
 
 @Log4j2
 @Component

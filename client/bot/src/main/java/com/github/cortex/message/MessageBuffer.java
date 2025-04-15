@@ -16,13 +16,12 @@ public class MessageBuffer<T> {
         messageQueue.add(message);
     }
 
-    public List<T> getAndClear() {
-        List<T> result = new ArrayList<>();
-        T message;
-        while ((message = messageQueue.poll()) != null) {
-            result.add(message);
-        }
-        return result;
+    public List<T> getAll() {
+        return new ArrayList<>(messageQueue);
+    }
+
+    public void clear() {
+        messageQueue.clear();
     }
 
     public boolean isEmpty() {

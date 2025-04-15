@@ -1,14 +1,15 @@
 package com.github.cortex.classification.service;
 
-import com.github.cortex.agro.AgroMessage;
-import com.github.cortex.agro.AgroMessageUtils;
-import com.github.cortex.classification.database.mapper.EntityMapper;
-import com.github.cortex.classification.database.dto.MessageClassificationEntity;
-import com.github.cortex.classification.database.MessageClassificationRepository;
+import com.github.cortex.agro.dto.AgroMessage;
+import com.github.cortex.agro.utils.AgroMessageUtils;
+import com.github.cortex.database.mapper.EntityMapper;
+import com.github.cortex.database.dto.classifcation.MessageClassificationEntity;
+import com.github.cortex.database.repository.MessageClassificationRepository;
 
-import com.github.cortex.classification.server_dto.MessageClassification;
+import com.github.cortex.classification.dto.MessageClassification;
 import com.github.cortex.exception.classifiaction.EmptyClassifiedMessagesException;
 
+import com.github.cortex.exception.classifiaction.MessageClassificationExchangeException;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,7 +35,7 @@ public class MessageClassificationPersistService {
         this.exchangeClient = exchangeClient;
     }
 
-    public void execute(List<AgroMessage> messages) {
+    public void execute(List<AgroMessage> messages) throws EmptyClassifiedMessagesException, MessageClassificationExchangeException {
         List<MessageClassification> classifiedMessages = exchangeClient.executeClassification(messages);
         if (classifiedMessages.isEmpty()) {
             throw createEmptyClassifiedMsgException(messages);

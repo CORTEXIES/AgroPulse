@@ -1,4 +1,4 @@
-package com.github.cortex.classification.database.mapper;
+package com.github.cortex.database.mapper;
 
 public abstract class EntityMapper<E, Dto> {
 

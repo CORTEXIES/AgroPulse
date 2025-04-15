@@ -1,7 +1,7 @@
 package com.github.cortex.message.handler.impl;
 
 import com.github.cortex.photo.PhotoController;
-import com.github.cortex.agro.AgroMessageFactory;
+import com.github.cortex.agro.service.AgroMessageFactory;
 import com.github.cortex.message.handler.Handler;
 import com.github.cortex.command.utils.CommandExecutor;
 
@@ -17,6 +17,8 @@ import java.util.Optional;
 
 @Service
 public class MessageHandler implements Handler {
+
+    private final static int MINIMAL_TEXT_LENGTH_FOR_RECORD = 30;
 
     private final PhotoController photoController;
     private final AgroMessageFactory agroMessageFactory;
@@ -56,8 +58,9 @@ public class MessageHandler implements Handler {
         String text = msg.getText();
         if (text.startsWith(COMMAND_PREFIX)) {
             return commandExecutor.execute(msg);
+        } else if (text.length() >= MINIMAL_TEXT_LENGTH_FOR_RECORD) {
+			agroMessageFactory.createAndRecord(msg);
         }
-        agroMessageFactory.createAndRecord(msg);
         return Optional.empty();
     }
 }

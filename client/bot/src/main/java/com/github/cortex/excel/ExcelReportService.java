@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.cortex.classification.ClassifiedMessagePair;
-import com.github.cortex.classification.server_dto.MessageClassification;
+import com.github.cortex.classification.dto.MessageClassification;
 import com.github.cortex.classification.utils.MessageClassificationFetcher;
 import com.github.cortex.classification.utils.MessageClassificationStatusUpdater;
-import com.github.cortex.classification.database.dto.MessageClassificationEntity;
+import com.github.cortex.database.dto.classifcation.MessageClassificationEntity;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;

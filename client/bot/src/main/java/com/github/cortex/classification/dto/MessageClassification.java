@@ -1,4 +1,4 @@
-package com.github.cortex.classification.server_dto;
+package com.github.cortex.classification.dto;
 
 import lombok.Getter;
 import lombok.Setter;

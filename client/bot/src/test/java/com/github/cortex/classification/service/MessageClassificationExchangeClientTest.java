@@ -1,5 +1,6 @@
 package com.github.cortex.classification.service;
 
+import com.github.cortex.agro.dto.Agronomist;
 import org.mockito.Mockito;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -8,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.github.cortex.agro.AgroMessage;
-import com.github.cortex.classification.server_dto.MessageClassification;
-import com.github.cortex.classification.server_dto.MessageClassificationResponse;
+import com.github.cortex.agro.dto.AgroMessage;
+import com.github.cortex.classification.dto.MessageClassification;
+import com.github.cortex.classification.dto.MessageClassificationResponse;
 import com.github.cortex.exception.classifiaction.MessageClassificationExchangeException;
 
 import java.util.List;
@@ -30,9 +31,11 @@ public class MessageClassificationExchangeClientTest {
         RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
         MessageClassificationExchangeClient client = new MessageClassificationExchangeClient(restTemplate, postURL);
 
-        List<AgroMessage> inputMessages = List.of(
-                new AgroMessage("TEXT", "TEXT", "TEXT")
-        );
+        Agronomist agronomist = new Agronomist("some_name", "id");
+        List<AgroMessage> messages = List.of(new AgroMessage(
+                agronomist,
+                "SOME_TEXT"
+        ));
         List<MessageClassification> mockResponse = List.of(
                 new MessageClassification(
                         LocalDateTime.now(),
@@ -58,7 +61,7 @@ public class MessageClassificationExchangeClientTest {
                 eq(MessageClassificationResponse.class)
         )).thenReturn(responseEntity);
 
-        List<MessageClassification> result = client.executeClassification(inputMessages);
+        List<MessageClassification> result = client.executeClassification(messages);
         assertEquals(mockResponse, result);
     }
 
@@ -118,9 +121,10 @@ public class MessageClassificationExchangeClientTest {
                 eq(MessageClassificationResponse.class)
         )).thenThrow(new RestClientException("Timeout"));
 
+        Agronomist agronomist = new Agronomist("some_name", "id");
+
         List<AgroMessage> messages = List.of(new AgroMessage(
-                "SOME_TEXT",
-                "SOME_TEXT",
+                agronomist,
                 "SOME_TEXT"
         ));
         assertThrows(MessageClassificationExchangeException.class, () -> {
