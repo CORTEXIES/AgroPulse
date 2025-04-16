@@ -6,7 +6,6 @@ import com.github.cortex.classification.dto.MessageClassification;
 import com.github.cortex.classification.dto.MessageClassificationResponse;
 import com.github.cortex.exception.classifiaction.MessageClassificationExchangeException;
 
-import com.github.cortex.message.MessageBuffer;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

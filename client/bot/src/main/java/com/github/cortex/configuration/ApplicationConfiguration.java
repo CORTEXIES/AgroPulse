@@ -1,4 +1,4 @@
-package com.github.cortex.application;
+package com.github.cortex.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

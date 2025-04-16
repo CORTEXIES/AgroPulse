@@ -1,10 +1,10 @@
 from transformers import BertTokenizerFast, BertForTokenClassification, BertConfig
 from transformers import Trainer, TrainingArguments, EarlyStoppingCallback
 import pandas as pd
-import numpy as np
 from transformers import TrainerCallback
 from sklearn.model_selection import train_test_split
 from datasets import Dataset
+from pathlib import Path
 
 label_list = ['O', 'B-data', 'I-data', 'B-operation', 'I-operation', 'B-plant', 'I-plant', 'B-perDay', 'I-perDay', 'B-perOperation', 'I-perOperation', 'B-department', 'I-department']
 label_to_id = {label: i for i, label in enumerate(label_list)}
@@ -45,10 +45,13 @@ def train_model(tokenized_data):
 
     print("Обучение модели")
     tokenizer, model = download_pretrained_model()
+    
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+    output_dir = BASE_DIR / "results"
 
     training_args = TrainingArguments(
         lr_scheduler_type="linear",
-        output_dir="./results",
+        output_dir=str(output_dir),
         eval_strategy="epoch",
         logging_strategy="epoch",
         save_strategy="epoch",
@@ -56,7 +59,7 @@ def train_model(tokenized_data):
         # warmup_steps=500,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
-        num_train_epochs=120,
+        num_train_epochs=80,
         weight_decay=0.01,
         save_total_limit=5,
         load_best_model_at_end=True,
@@ -80,13 +83,21 @@ def train_model(tokenized_data):
     return tokenizer, model
 
 def save_trained_model(model, tokenizer):
-    model.save_pretrained("./saved/model/")
-    tokenizer.save_pretrained("./saved/tokenizer")
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+    model_dir = BASE_DIR / "saved" / "model"
+    tokenizer_dir = BASE_DIR / "saved" / "tokenizer"
+
+    model.save_pretrained(model_dir)
+    tokenizer.save_pretrained(tokenizer_dir)
+
 
 def load_pretrained_model():
-    tokenizer = BertTokenizerFast.from_pretrained("./saved/tokenizer")
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent # = start/
+    tokenizer_path = BASE_DIR / "saved" / "tokenizer"
+    tokenizer = BertTokenizerFast.from_pretrained(tokenizer_path, local_files_only=True)
+    model_path = BASE_DIR / "saved" / "model"
     model = BertForTokenClassification.from_pretrained(
-        "./saved/model/",
+        model_path,
         num_labels=len(label_list)
     )
     return tokenizer, model

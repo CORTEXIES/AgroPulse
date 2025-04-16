@@ -29,7 +29,6 @@ defusedxml==0.7.1
 Deprecated==1.2.18
 dill==0.3.8
 distro==1.9.0
-Django==5.1.8
 django-annoying==0.10.6
 django-cors-headers==3.6.0
 django-csp==3.7
@@ -93,7 +92,6 @@ joblib==1.4.2
 jsf==0.11.2
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
-label-studio==1.17.0
 label-studio-sdk==1.0.11
 launchdarkly-server-sdk==8.2.1
 lockfile==0.12.2

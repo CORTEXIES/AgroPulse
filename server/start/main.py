@@ -1,55 +1,60 @@
-from scripts.ProcessingAlgorithms.algorithms import LowerAlgorithm, AbbrExpandAlgorithm, NumsProcAlgorithm, SpellCheckAlgorithm
 from scripts.ProcessingAlgorithms.texthandler import TextHandler
-from scripts.helpers.helpers import generate_unique_words, generate_abbreviations, transform_labels
-from scripts.helpers.xlsx_saver_reader import save_postproc_data_table, read_data_with_labels, transform_xlsx_into_csv, save_data_with_transformed_labels
-from scripts.model.model import prepare_train_save_model
+from scripts.ProcessingAlgorithms.algorithms import LowerAlgorithm, AbbrExpandAlgorithm, NumsProcAlgorithm
+
+from scripts.helpers.helpers import generate_abbreviations, transform_labels
 from scripts.model.model_usage import predict_labels, convert_multiple_labels_to_output
-from scripts.model.model_precision import print_precision_scores
+from scripts.helpers.xlsx_saver_reader import read_data_with_labels, save_data_with_transformed_labels
+
+import logging
 from pathlib import Path
-import pandas as pd
 
 def preproc_texts(data, preproc_dir):
+   
     abbreviations = generate_abbreviations(preproc_dir, generate_sorted_abbreviations=False)
     text_handler = TextHandler()
     
     text_handler.add_algorithm(LowerAlgorithm())
     text_handler.add_algorithm(AbbrExpandAlgorithm(preproc_dir, abbreviations))
     text_handler.add_algorithm(NumsProcAlgorithm())
-    # text_handler.add_algorithm(SpellCheckAlgorithm(preproc_dir)) # Не работает :<
 
     for i in range(len(data)):
         data[i] = text_handler.process_text(data[i])
     
     return data
 
+
 def proc_labled_data(data_dir):
     data_with_labels = read_data_with_labels(data_dir)
     transformed_labels = transform_labels(data_with_labels)
     data_with_labels['label'] = transformed_labels
 
-    print(data_with_labels.head())
-
     save_data_with_transformed_labels(data_with_labels, data_dir)
 
-def process_texts(texts, abbreviations = None):
-    if abbreviations is None:
-        abbreviations = generate_abbreviations(Path('./text_info'), generate_sorted_abbreviations=False)
 
-    text_handler = TextHandler()
-
-    text_handler.add_algorithm(LowerAlgorithm())
-    text_handler.add_algorithm(AbbrExpandAlgorithm(abbreviations=abbreviations))
-    text_handler.add_algorithm(NumsProcAlgorithm())
-
-    for i in range(len(texts)):
-        texts[i] = text_handler.process_text(texts[i])
+def classify(reports: list[str], abbreviations = None):
     
-    del text_handler
+    if abbreviations is None:
+        abbreviations = generate_abbreviations(
+                Path('./start/text_info'),
+                generate_sorted_abbreviations=False
+        )
 
-    labels_list = predict_labels(texts)
-    outputs = convert_multiple_labels_to_output(texts, labels_list)
-    return outputs
+    handler = TextHandler()
 
+    handler.add_algorithm(LowerAlgorithm())
+    handler.add_algorithm(AbbrExpandAlgorithm(abbreviations=abbreviations))
+    handler.add_algorithm(NumsProcAlgorithm())
+
+    for i in range(len(reports)):
+        reports[i] = handler.process_text(reports[i])
+    
+    del handler
+
+    labels_list = predict_labels(reports)
+    classified_messages = convert_multiple_labels_to_output(reports, labels_list)
+    logging.info(classified_messages)
+
+    return classified_messages
 
 
 def main():
@@ -73,7 +78,7 @@ def main():
     # proc_labled_data(data_dir)
 
     # 5. Получение готовой модели
-    prepare_train_save_model(data_dir)
+    # prepare_train_save_model(data_dir)
 
     # 6. Применение готовой модели к предобработанным данным
 #     texts = ["""пахота зяби под многолетние травы
@@ -105,7 +110,7 @@ def main():
 #     print(outputs)
 
     # 7. Проверка точности
-    print_precision_scores(data_dir)
+    # print_precision_scores(data_dir)
 
     # 8. Применение готовой модели с совместной обработкой данных
 #     texts = ["""Пахота зяби под мн тр
@@ -128,4 +133,5 @@ def main():
 #     outputs = process_texts(texts)
 #     print(outputs)
 
-# main()
+# if __name__ == "__main__":
+#     main()

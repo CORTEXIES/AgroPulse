@@ -25,7 +25,7 @@ bot:
 
 excel:
   relative_path: ${RELATIVE_EXCEL_PATH}
-  file_prefix: Отчёт_за_
+  file_prefix: "Отчёт за "
   columns_config: >-
     {
       "0": "Дата",
