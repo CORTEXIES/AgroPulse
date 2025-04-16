@@ -1,17 +1,17 @@
-from .xlsx_saver_reader import save_unique_words
+# from .xlsx_saver_reader import save_unique_words
 import numpy as np
 import pandas as pd
 
-def generate_unique_words(data_dir, preproc_dir):
-    data = pd.read_excel(data_dir / 'postprocdata.xlsx').transpose().to_numpy()[2]
-    words = set()
-    for line in data:
-        for word in line.split():
-            if any(str.isdigit(ch) for ch in word):
-                continue
-            words.add(word.lower())
-    words = sorted(list(words))
-    save_unique_words(words, preproc_dir)
+# def generate_unique_words(data_dir, preproc_dir):
+#     data = pd.read_excel(data_dir / 'postprocdata.xlsx').transpose().to_numpy()[2]
+#     words = set()
+#     for line in data:
+#         for word in line.split():
+#             if any(str.isdigit(ch) for ch in word):
+#                 continue
+#             words.add(word.lower())
+#     words = sorted(list(words))
+#     save_unique_words(words, preproc_dir)
 
 def generate_abbreviations(preproc_dir, generate_sorted_abbreviations = False):
     abbreviations = pd.read_excel(preproc_dir / 'abbriviations.xlsx').to_numpy()
@@ -31,25 +31,25 @@ def generate_abbreviations(preproc_dir, generate_sorted_abbreviations = False):
         output.to_excel(preproc_dir / 'sortedabbriviations.xlsx')
     return abbreviations
 
-def transform_labels(data):
-    bio_data = []
-    for _, row in data.iterrows():
-        text = row["postproc_data"]
-        labels = eval(row["label"])
-        tokens = text.split()
-        bio_labels = ["O"] * len(tokens)
+# def transform_labels(data):
+#     bio_data = []
+#     for _, row in data.iterrows():
+#         text = row["postproc_data"]
+#         labels = eval(row["label"])
+#         tokens = text.split()
+#         bio_labels = ["O"] * len(tokens)
         
-        for label in labels:
-            start = label["start"]
-            end = label["end"]
-            entity = label["labels"][0]
+#         for label in labels:
+#             start = label["start"]
+#             end = label["end"]
+#             entity = label["labels"][0]
             
-            token_indices = [i for i, tok in enumerate(tokens) if text.find(tok) >= start and text.find(tok) < end]
-            if token_indices:
-                bio_labels[token_indices[0]] = f"B-{entity}"
-                for idx in token_indices[1:]:
-                    bio_labels[idx] = f"I-{entity}"
+#             token_indices = [i for i, tok in enumerate(tokens) if text.find(tok) >= start and text.find(tok) < end]
+#             if token_indices:
+#                 bio_labels[token_indices[0]] = f"B-{entity}"
+#                 for idx in token_indices[1:]:
+#                     bio_labels[idx] = f"I-{entity}"
         
-        bio_data.append(list(zip(tokens, bio_labels)))
+#         bio_data.append(list(zip(tokens, bio_labels)))
     
-    return bio_data
+#     return bio_data
