@@ -1,4 +1,4 @@
-package com.github.cortex.message;
+package com.github.cortex.message.buffer;
 
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Component
-public class MessageBuffer<T> {
+public abstract class MessageBuffer<T> {
 
     private final Queue<T> messageQueue = new ConcurrentLinkedQueue<>();
 

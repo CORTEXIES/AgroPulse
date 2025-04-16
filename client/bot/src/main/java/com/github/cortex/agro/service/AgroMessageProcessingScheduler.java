@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import com.github.cortex.message.MessageBuffer;
+import com.github.cortex.message.buffer.MessageBuffer;
 import com.github.cortex.classification.service.MessageClassificationPersistService;
 
 @Log4j2

@@ -1,12 +1,12 @@
+import logging
 from fastapi import FastAPI
 from pydantic import BaseModel
 from datetime import datetime
 from pathlib import Path
-from main import process_texts, generate_abbreviations
-
-abbreviations = generate_abbreviations(Path('./text_info'), generate_sorted_abbreviations=False)
+from main import classify, generate_abbreviations
 
 app = FastAPI()
+abbreviations = generate_abbreviations(Path('./start/text_info'), generate_sorted_abbreviations=False)
 
 class Agronomist(BaseModel):
     fullName: str
@@ -14,10 +14,10 @@ class Agronomist(BaseModel):
 
 class AgroMessage(BaseModel):
     agronomist: Agronomist
-    text: str
+    report: str
 
 class MessageClassification(BaseModel):
-    data: datetime
+    date: datetime
     department: str
     operation: str
     plant: str
@@ -26,34 +26,40 @@ class MessageClassification(BaseModel):
     grosPerDay: int
     grosPerOperation: int
 
-def parse_int(string):
+
+def parse_int(str_value: str, default = -1):
     try:
-        return int(string)
-    except ValueError:
-        return 0
+        return int(str_value)
+    except (ValueError, TypeError):
+        logging.error(f"Failed to parse str value {str_value} to int")
+        return default
 
 @app.post("/messages/proc_many")
 async def process_messages(messages: list[AgroMessage]):
-    texts = [m.text for m in messages]
-    outputs = process_texts(texts, abbreviations)
+    
+    reports = [m.report for m in messages]
+    classified_messages = classify(reports, abbreviations)
+    print(classified_messages)
 
     responses = []
-    for output in outputs:
-        for dict in output:
+    for message in classified_messages:
+        for field in message:
+            
             department = ''
-            if 'department' in dict:
-                department = 'АОР' if 'отд' in dict['department'] else dict['department']
-
-            responses.append(MessageClassification(
-                data = dict.get('data', str(datetime.now())),
+            if 'department' in field:
+                department = 'АОР' if 'отд' in field['department'] else field['department']
+            
+            classified_message = MessageClassification(
+                date = datetime.now(),
                 department = department,
-                operation = dict.get('operation', ''),
-                plant = dict.get('plant', ''),
-                perDay = parse_int(dict.get('perDay', '')),
-                perOperation = parse_int(dict.get('perOperation', '')),
-                grosPerDay = parse_int(dict.get('grosPerDay', '')),
-                grosPerOperation = parse_int(dict.get('grosPerOperation', '')),
-            ))
-    
-    
+                operation = field.get('operation', ''),
+                plant = field.get('plant', ''),
+                perDay = parse_int(field.get('perDay')),
+                perOperation = parse_int(field.get('perOperation')),
+                grosPerDay= parse_int(field.get('grosPerDay')),
+                grosPerOperation= parse_int(field.get('grosPerOperation'))
+            )
+            responses.append(classified_message)
+        
+    print(responses)
     return {"response": responses}

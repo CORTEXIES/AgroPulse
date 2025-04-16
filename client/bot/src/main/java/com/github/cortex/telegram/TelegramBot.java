@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 
+import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -51,6 +52,7 @@ public class TelegramBot implements LongPollingUpdateConsumer {
             switch (answerMessage) {
                 case SendMessage sendMessage -> client.execute(sendMessage);
                 case SendDocument sendDocument -> client.execute(sendDocument);
+                case GetFile getFile -> client.execute(getFile);
                 default -> throw createUnsupportedMessageTypeException(answerMessage);
             }
         } catch (TelegramApiException ex) {

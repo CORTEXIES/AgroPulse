@@ -2,7 +2,7 @@ package com.github.cortex.agro.service;
 
 import com.github.cortex.agro.dto.AgroMessage;
 import com.github.cortex.agro.dto.Agronomist;
-import com.github.cortex.message.MessageBuffer;
+import com.github.cortex.message.buffer.MessageBuffer;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

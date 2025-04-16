@@ -120,10 +120,11 @@ public class ExcelReportGenerator {
 
     private void fillRowWithData(Row row, MessageClassification msg, CellStyle cellStyle) {
         Cell cell;
-
         cell = row.createCell(0);
         cell.setCellValue(formatDate(msg.getDate()));
-        cell.setCellStyle(cellStyle);
+
+        CellStyle dateStyle = createDateStyle(row.getSheet().getWorkbook(), cellStyle);
+        cell.setCellStyle(dateStyle);
 
         cell = row.createCell(1);
         cell.setCellValue(msg.getDepartment());
@@ -152,6 +153,15 @@ public class ExcelReportGenerator {
         cell = row.createCell(7);
         cell.setCellValue(msg.getGrosPerOperation());
         cell.setCellStyle(cellStyle);
+    }
+
+    private CellStyle createDateStyle(Workbook workbook, CellStyle baseCellStyle) {
+        CellStyle dateStyle = workbook.createCellStyle();
+        dateStyle.cloneStyleFrom(baseCellStyle);
+
+        short dateFormat = workbook.createDataFormat().getFormat("dd.MM.yyyy");
+        dateStyle.setDataFormat(dateFormat);
+        return dateStyle;
     }
 
     private String formatDate(LocalDateTime dateTime) {
