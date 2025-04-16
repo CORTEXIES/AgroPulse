@@ -5,3 +5,6 @@
 /scripts/model/__pycache__/
 /data/~*
 /archived_models/
+/__pycache__/
+*.pyc
+saved/

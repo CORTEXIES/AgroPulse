@@ -1,6 +1,25 @@
-# client
-/client/bot/node_modules/
-/client/bot/.wwebjs_*
+### IDEA ###
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+.idea
+
+### env files ###
+
+.git
+*.log
+*.log.gz
+*.env
+client/bot/logs/
 
 # server
 /server/__pycache__/
