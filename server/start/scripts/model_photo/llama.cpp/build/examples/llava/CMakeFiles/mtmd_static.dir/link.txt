@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libmtmd_static.a CMakeFiles/mtmd.dir/mtmd.cpp.o CMakeFiles/mtmd.dir/clip.cpp.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libmtmd_static.a
