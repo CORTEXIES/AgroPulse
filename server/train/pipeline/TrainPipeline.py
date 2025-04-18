@@ -1,5 +1,3 @@
-
-
 class TrainStage:
     def do_task(self, data):
         return None

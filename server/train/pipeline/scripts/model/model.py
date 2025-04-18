@@ -1,11 +1,16 @@
-from transformers import BertTokenizerFast, BertForTokenClassification, BertConfig
-from transformers import Trainer, TrainingArguments, EarlyStoppingCallback
-import pandas as pd
-import numpy as np
-from transformers import TrainerCallback
-from sklearn.model_selection import train_test_split
-from datasets import Dataset
 from pathlib import Path
+
+import pandas as pd
+from datasets import Dataset
+from sklearn.model_selection import train_test_split
+from transformers import (
+    BertConfig,
+    BertForTokenClassification,
+    BertTokenizerFast,
+    Trainer,
+    TrainerCallback,
+    TrainingArguments,
+)
 
 label_list = ['O', 'B-data', 'I-data', 'B-operation', 'I-operation', 'B-plant', 'I-plant', 'B-perDay', 'I-perDay', 'B-perOperation', 
               'I-perOperation', 'B-department', 'I-department', 'B-grosPerDay', 'I-grosPerDay', 'B-grosPerOperation', 'I-grosPerOperation']

@@ -1,10 +1,10 @@
-import logging
-from fastapi import FastAPI
-from pydantic import BaseModel
 from datetime import datetime
 from pathlib import Path
-from main import classify, generate_abbreviations
 from typing import Optional
+
+from fastapi import FastAPI
+from main import classify, generate_abbreviations
+from pydantic import BaseModel
 from scripts.model.model import load_pretrained_model
 
 app = FastAPI()
@@ -34,7 +34,6 @@ def parse_int(str_value: str, default = -1):
     try:
         return int(str_value)
     except (ValueError, TypeError):
-        # logging.error(f"Failed to parse str value {str_value} to int")
         return default
 
 @app.post("/messages/proc_many")
@@ -44,17 +43,14 @@ async def process_messages(messages: list[AgroMessage]):
     devided_reports = []
     for report in reports:
         devided_reports += list(report.split('\n\n'))
-    # print(devided_reports)
     classified_messages = classify(devided_reports, abbreviations, tokenizer, model)
-    # print(classified_messages)
 
     responses = []
     for message in classified_messages:
         for dict in message:
             
-            # Department check
             department = 'АОР'
-            if 'department' in dict and dict['department'] != 'по': # "по" идентифицирует 'АОР'
+            if 'department' in dict and dict['department'] != 'по':
                 predicted_dep = dict['department']
                 aor_list = ['кавказ', "север", 'центр', 'юг', 'Рассвет']
                 if all(item not in predicted_dep for item in aor_list):
@@ -89,5 +85,4 @@ async def process_messages(messages: list[AgroMessage]):
             )
             responses.append(classified_message)
         
-    # print(responses)
     return {"response": responses}

@@ -1,4 +1,4 @@
-from transformers import BertTokenizerFast, BertForTokenClassification
+from transformers import BertForTokenClassification, BertTokenizerFast
 
 label_list = ['O', 'B-data', 'I-data', 'B-operation', 'I-operation', 'B-plant', 'I-plant', 'B-perDay', 'I-perDay', 'B-perOperation', 
               'I-perOperation', 'B-department', 'I-department', 'B-grosPerDay', 'I-grosPerDay', 'B-grosPerOperation', 'I-grosPerOperation']

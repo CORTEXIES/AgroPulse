@@ -1,6 +1,8 @@
 import pandas as pd
+from seqeval.metrics import f1_score, precision_score, recall_score
+
 from .model_usage import predict_labels
-from seqeval.metrics import precision_score, recall_score, f1_score, classification_report
+
 
 def print_precision_scores(data_dir):
     data_with_labels = pd.read_excel(data_dir / "datawithbiolabels.xlsx")

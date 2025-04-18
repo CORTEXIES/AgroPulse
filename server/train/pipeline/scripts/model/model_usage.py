@@ -1,8 +1,8 @@
-from .model import get_id_to_label, load_pretrained_model
-from transformers import BertTokenizerFast, BertForTokenClassification
 import torch
 from datasets import Dataset
-import numpy as np
+
+from .model import get_id_to_label, load_pretrained_model
+
 
 def predict_labels(texts):
     tokenizer, model = load_pretrained_model()
