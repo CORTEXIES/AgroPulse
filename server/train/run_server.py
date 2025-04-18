@@ -1,8 +1,9 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
 from datetime import datetime
 from pathlib import Path
-from main import process_texts, generate_abbreviations
+
+from fastapi import FastAPI
+from main import generate_abbreviations, process_texts
+from pydantic import BaseModel
 
 abbreviations = generate_abbreviations(Path('./text_info'), generate_sorted_abbreviations=False)
 
