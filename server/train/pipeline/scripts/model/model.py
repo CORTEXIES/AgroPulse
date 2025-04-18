@@ -5,6 +5,7 @@ import numpy as np
 from transformers import TrainerCallback
 from sklearn.model_selection import train_test_split
 from datasets import Dataset
+from pathlib import Path
 
 label_list = ['O', 'B-data', 'I-data', 'B-operation', 'I-operation', 'B-plant', 'I-plant', 'B-perDay', 'I-perDay', 'B-perOperation', 
               'I-perOperation', 'B-department', 'I-department', 'B-grosPerDay', 'I-grosPerDay', 'B-grosPerOperation', 'I-grosPerOperation']
@@ -42,10 +43,13 @@ class DualEvalCallback(TrainerCallback):
         print(f"  Train Loss: {train_metrics.get('train_loss', 'N/A')}")
         print(f"  Valid Loss: {eval_metrics.get('eval_loss', 'N/A')}")
 
-def train_model(tokenized_data):
+def train_model(tokenized_data, new_model = True):
 
     print("Обучение модели")
-    tokenizer, model = download_pretrained_model()
+    if new_model:
+        tokenizer, model = download_pretrained_model()
+    else:
+        tokenizer, model = load_pretrained_model()
 
     training_args = TrainingArguments(
         lr_scheduler_type="linear",
@@ -77,8 +81,24 @@ def train_model(tokenized_data):
 
     # trainer.add_callback(DualEvalCallback(trainer))
 
-    trainer.train()
+    if new_model:
+        trainer.train()
+    else:
+        trainer.train(resume_from_checkpoint=get_latest_checkpoint("./results"))
     return tokenizer, model
+
+def get_latest_checkpoint(checkpoint_dir):
+    checkpoint_dir = Path(checkpoint_dir)
+    checkpoints = [d for d in checkpoint_dir.iterdir() if d.is_dir() and d.name.startswith("checkpoint")]
+    
+    if not checkpoints:
+        raise FileNotFoundError("No checkpoints found in the directory.")
+    
+    latest_checkpoint = max(
+        checkpoints,
+        key=lambda x: int(x.name.split("-")[-1])
+    )
+    return str(latest_checkpoint)
 
 def save_trained_model(model, tokenizer):
     model.save_pretrained("./saved/model/")
@@ -166,11 +186,11 @@ def prepare_datasets(data_dir):
     }
     return tokenized_datasets
 
-def prepare_train_save_model(data_dir):
+def prepare_train_save_model(data_dir, new_model = True):
     print("Начало работы основного метода создания модели.")
     
     tokenized_datasets = prepare_datasets(data_dir)
-    
-    tokenizer, model = train_model(tokenized_datasets)
-    
+
+    tokenizer, model = train_model(tokenized_datasets, new_model)
+        
     save_trained_model(model, tokenizer)

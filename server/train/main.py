@@ -107,7 +107,7 @@ def main():
     # proc_labled_data(data_dir)
 
     # 5. Получение готовой модели
-    prepare_train_save_model(data_dir)
+    prepare_train_save_model(data_dir, new_model=False)
 
     # 6. Применение готовой модели к предобработанным данным
 #     texts = ["""пахота зяби под многолетние травы
