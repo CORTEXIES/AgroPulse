@@ -13,8 +13,6 @@ import com.github.cortex.database.dto.classifcation.MessageClassificationEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//TODO: тест
-
 @Service
 public class ExcelReportService {
 

@@ -16,12 +16,10 @@ public abstract class MessageBuffer<T> {
         messageQueue.add(message);
     }
 
-    public List<T> getAll() {
-        return new ArrayList<>(messageQueue);
-    }
-
-    public void clear() {
+    public List<T> getAllAndClear() {
+        List<T> copy = new ArrayList<>(messageQueue);
         messageQueue.clear();
+        return copy;
     }
 
     public boolean isEmpty() {

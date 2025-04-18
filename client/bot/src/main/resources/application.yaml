@@ -14,7 +14,6 @@ spring:
       ddl-auto: update
 
 bot:
-  name: ${BOT_NAME}
   token: ${BOT_TOKEN}
   request_delay: ${REQUEST_DELAY}
   command:

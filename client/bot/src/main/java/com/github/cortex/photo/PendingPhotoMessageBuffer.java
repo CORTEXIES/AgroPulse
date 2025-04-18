@@ -11,11 +11,10 @@ import java.util.Optional;
 public class PendingPhotoMessageBuffer extends MessageBuffer<Message> {
 
     public Optional<Message> consumeLast() {
-        List<Message> all = getAll();
+        List<Message> all = getAllAndClear();
         if (all.isEmpty()) return Optional.empty();
 
         Message last = all.getLast();
-        clear();
         return Optional.of(last);
     }
 }

@@ -16,6 +16,8 @@ import com.github.cortex.exception.classifiaction.MessageClassificationExchangeE
 
 import java.util.List;
 import java.time.LocalDateTime;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +36,8 @@ public class MessageClassificationExchangeClientTest {
         Agronomist agronomist = new Agronomist("some_name", "id");
         List<AgroMessage> messages = List.of(new AgroMessage(
                 agronomist,
-                "SOME_TEXT"
+                Optional.of("SOME_TEXT"),
+                Optional.empty()
         ));
         List<MessageClassification> mockResponse = List.of(
                 new MessageClassification(
@@ -123,7 +126,8 @@ public class MessageClassificationExchangeClientTest {
 
         List<AgroMessage> messages = List.of(new AgroMessage(
                 agronomist,
-                "SOME_TEXT"
+                Optional.of("SOME_TEXT"),
+                Optional.empty()
         ));
         assertThrows(MessageClassificationExchangeException.class, () -> {
             client.executeClassification(messages);

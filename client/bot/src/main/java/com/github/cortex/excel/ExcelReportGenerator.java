@@ -1,6 +1,7 @@
 package com.github.cortex.excel;
 
 import java.io.File;
+import java.time.DateTimeException;
 import java.util.Map;
 import java.util.List;
 import java.io.IOException;
@@ -183,7 +184,12 @@ public class ExcelReportGenerator {
     }
 
     private String formatDate(LocalDateTime dateTime) {
-        return dateTime != null ? dateTime.format(dateTimeFormatter) : "Не указана";
+        try {
+        	return dateTime != null ? dateTime.format(dateTimeFormatter) : "Не указана";
+        } catch (DateTimeException ex) {
+            log.error("Error converting the date using date time formatter", ex);
+            return dateTime.toString();
+        }
     }
 
     private File createFile(Workbook workbook) {
