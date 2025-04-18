@@ -1,6 +1,8 @@
-package com.github.cortex.telegram;
+package com.github.cortex.method;
 
 import com.github.cortex.update.UpdateRouter;
+import com.github.cortex.telegram.TelegramBot;
+import com.github.cortex.telegram.BotRegistrationService;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,14 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class TelegramBotController {
+public class UpdateProcessor {
 
     private final BotRegistrationService registrationService;
     private final UpdateRouter updateRouter;
     private TelegramBot bot;
 
     @Autowired
-    public TelegramBotController(
+    public UpdateProcessor(
             BotRegistrationService registrationService,
             UpdateRouter updateRouter
     ) {
@@ -32,7 +34,7 @@ public class TelegramBotController {
         registrationService.register(bot);
     }
 
-    public void handleUpdates(List<Update> updates) {
+    public void processUpdates(List<Update> updates) {
         CompletableFuture.runAsync(() -> {
             updates.stream()
                     .map(updateRouter::routeAndHandle)

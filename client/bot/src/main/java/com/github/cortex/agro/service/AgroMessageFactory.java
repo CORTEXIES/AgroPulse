@@ -2,35 +2,47 @@ package com.github.cortex.agro.service;
 
 import com.github.cortex.agro.dto.AgroMessage;
 import com.github.cortex.agro.dto.Agronomist;
+import com.github.cortex.message.buffer.AgroMessageBuffer;
 import com.github.cortex.message.buffer.MessageBuffer;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
+
+import java.util.Optional;
 
 @Service
 public class AgroMessageFactory {
 
-    private final MessageBuffer<AgroMessage> messageBuffer;
+    private final AgroMessageBuffer agroMessageBuffer;
 
     @Autowired
-    public AgroMessageFactory(MessageBuffer<AgroMessage> messageBuffer) {
-        this.messageBuffer = messageBuffer;
+    public AgroMessageFactory(AgroMessageBuffer agroMessageBuffer) {
+        this.agroMessageBuffer = agroMessageBuffer;
     }
 
-    public void createAndRecord(Message msg) {
-        AgroMessage agroMessage = create(msg);
-        messageBuffer.add(agroMessage);
+    public void createAndRecord(Message msg, Optional<String> photoUrl) {
+        AgroMessage agroMessage = create(msg, photoUrl);
+        agroMessageBuffer.add(agroMessage);
     }
 
-    private AgroMessage create(Message msg) {
+    private AgroMessage create(Message msg, Optional<String> photoUrl) {
         User consumer = msg.getFrom();
         String fullName = consumer.getFirstName();
-        if (consumer.getLastName() != "null") {
-        	fullName = String.format("%s %s", consumer.getFirstName(), consumer.getLastName());
+        if (consumer.getLastName() != null) {
+        	fullName = " " + consumer.getLastName();
         }
         Agronomist agronomist = new Agronomist(fullName, consumer.getId().toString());
-        return new AgroMessage(agronomist, msg.getText());
+
+        if (photoUrl.isPresent()) {
+            return new AgroMessage(agronomist, Optional.empty(), photoUrl);
+        }
+        return new AgroMessage(
+                agronomist,
+                Optional.of(msg.getText()),
+                Optional.empty()
+        );
     }
 }

@@ -4,7 +4,7 @@ import com.github.cortex.agro.service.AgroMessageFactory;
 import com.github.cortex.message.handler.Handler;
 import com.github.cortex.command.utils.CommandExecutor;
 
-import com.github.cortex.photo.PhotoController;
+import com.github.cortex.photo.PhotoService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class MessageHandler implements Handler {
 
     private final CommandExecutor commandExecutor;
     private final AgroMessageFactory agroMessageFactory;
-    private final PhotoController photoController;
+    private final PhotoService photoService;
 
     @Value("${bot.command.prefix}")
     private String COMMAND_PREFIX;
@@ -31,11 +31,11 @@ public class MessageHandler implements Handler {
     public MessageHandler(
             CommandExecutor commandExecutor,
             AgroMessageFactory agroMessageFactory,
-            PhotoController photoController
+            PhotoService photoService
     ) {
         this.agroMessageFactory = agroMessageFactory;
         this.commandExecutor = commandExecutor;
-        this.photoController = photoController;
+        this.photoService = photoService;
     }
 
     @Override
@@ -46,21 +46,37 @@ public class MessageHandler implements Handler {
     @Override
     public Optional<PartialBotApiMethod<?>> handle(Update update) {
         Message msg = update.getMessage();
-        if (msg.hasText()) {
-            return handleText(msg);
-        } else if (msg.hasPhoto() || msg.hasDocument()) {
-            photoController.recordPhotoId(msg);
+
+        if (!hasRelevantContent(msg)) return Optional.empty();
+
+        if (isCommand(msg)) {
+            return commandExecutor.execute(msg);
         }
-        return Optional.empty();
+
+        if (isLongText(msg)) {
+            agroMessageFactory.createAndRecord(msg, Optional.empty());
+            return Optional.empty();
+        }
+
+        return photoService.requestFileDownload(msg);
     }
 
-    private Optional<PartialBotApiMethod<?>> handleText(Message msg) {
-        String text = msg.getText();
-        if (text.startsWith(COMMAND_PREFIX)) {
-            return commandExecutor.execute(msg);
-        } else if (text.length() >= MINIMAL_TEXT_LENGTH_FOR_RECORD) {
-			agroMessageFactory.createAndRecord(msg);
-        }
-        return Optional.empty();
+    private boolean isCommand(Message msg) {
+        return msg.hasText() && msg.getText().startsWith(COMMAND_PREFIX);
+    }
+
+    private boolean isLongText(Message msg) {
+        return msg.hasText() && msg.getText().length() >= MINIMAL_TEXT_LENGTH_FOR_RECORD;
+    }
+
+    private boolean hasRelevantContent(Message msg) {
+        return msg.hasText() || msg.hasPhoto() || isSupportedImageDocument(msg);
+    }
+
+    private boolean isSupportedImageDocument(Message msg) {
+        return msg.hasDocument() &&
+                msg.getDocument().getMimeType() != null &&
+                msg.getDocument().getMimeType().equals("image/jpeg") ||
+                msg.getDocument().getMimeType().equals("image/png");
     }
 }
