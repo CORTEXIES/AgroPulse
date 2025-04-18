@@ -6,7 +6,8 @@ from transformers import TrainerCallback
 from sklearn.model_selection import train_test_split
 from datasets import Dataset
 
-label_list = ['O', 'B-data', 'I-data', 'B-operation', 'I-operation', 'B-plant', 'I-plant', 'B-perDay', 'I-perDay', 'B-perOperation', 'I-perOperation', 'B-department', 'I-department']
+label_list = ['O', 'B-data', 'I-data', 'B-operation', 'I-operation', 'B-plant', 'I-plant', 'B-perDay', 'I-perDay', 'B-perOperation', 
+              'I-perOperation', 'B-department', 'I-department', 'B-grosPerDay', 'I-grosPerDay', 'B-grosPerOperation', 'I-grosPerOperation']
 label_to_id = {label: i for i, label in enumerate(label_list)}
 id_to_label = {i: label for i, label in enumerate(label_list)}
 
@@ -15,12 +16,12 @@ def get_id_to_label():
 
 def download_pretrained_model():
     print("Загрузка предобученной модели по сети")
-    tokenizer = BertTokenizerFast.from_pretrained("DeepPavlov/rubert-base-cased")
-    config = BertConfig.from_pretrained("DeepPavlov/rubert-base-cased")
+    tokenizer = BertTokenizerFast.from_pretrained("ai-forever/ruBert-large")
+    config = BertConfig.from_pretrained("ai-forever/ruBert-large")
     config.hidden_dropout_prob = 0.3
     config.num_labels=len(label_list)
     model = BertForTokenClassification.from_pretrained(
-        "DeepPavlov/rubert-base-cased",
+        "ai-forever/ruBert-large",
         config=config,
     )
     return tokenizer, model
@@ -52,11 +53,11 @@ def train_model(tokenized_data):
         eval_strategy="epoch",
         logging_strategy="epoch",
         save_strategy="epoch",
-        learning_rate=1e-5,
+        learning_rate=2e-5,
         # warmup_steps=500,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
-        num_train_epochs=80,
+        num_train_epochs=30,
         weight_decay=0.01,
         save_total_limit=5,
         load_best_model_at_end=True,

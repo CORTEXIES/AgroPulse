@@ -1,31 +1,35 @@
-from scripts.ProcessingAlgorithms.algorithms import LowerAlgorithm, AbbrExpandAlgorithm, NumsProcAlgorithm, SpellCheckAlgorithm
-from scripts.ProcessingAlgorithms.texthandler import TextHandler
-from scripts.helpers.helpers import generate_unique_words, generate_abbreviations, transform_labels
-from scripts.helpers.xlsx_saver_reader import save_postproc_data_table, read_data_with_labels, transform_xlsx_into_csv, save_data_with_transformed_labels
-from scripts.model.model import prepare_train_save_model
-from scripts.model.model_usage import predict_labels, convert_multiple_labels_to_output
-from scripts.model.model_precision import print_precision_scores
+from pipeline.scripts.ProcessingAlgorithms.algorithms import LowerAlgorithm, AbbrExpandAlgorithm, NumsProcAlgorithm, SpellCheckAlgorithm
+# from scripts.ProcessingAlgorithms.texthandler import TextHandler
+from pipeline.scripts.helpers.helpers import generate_unique_words, generate_abbreviations, transform_labels, generate_dictionary
+from pipeline.scripts.helpers.xlsx_saver_reader import save_postproc_data_table, read_data_with_labels, transform_xlsx_into_csv, save_data_with_transformed_labels
+from pipeline.scripts.model.model import prepare_train_save_model
+# from scripts.model.model_usage import predict_labels, convert_multiple_labels_to_output
+from pipeline.scripts.model.model_precision import print_precision_scores
 from pathlib import Path
 import pandas as pd
+from pipeline.Config import Config
+from pipeline.TrainPipeline import TrainPipeline
+from pipeline.TrainStages import TextPreprocStage
 
-def preproc_texts(data, preproc_dir):
-    abbreviations = generate_abbreviations(preproc_dir, generate_sorted_abbreviations=False)
-    text_handler = TextHandler()
+# def preproc_texts(data, preproc_dir):
+#     abbreviations = generate_abbreviations(preproc_dir, generate_sorted_abbreviations=False)
+#     text_handler = TextHandler()
     
-    text_handler.add_algorithm(LowerAlgorithm())
-    text_handler.add_algorithm(AbbrExpandAlgorithm(preproc_dir, abbreviations))
-    text_handler.add_algorithm(NumsProcAlgorithm())
-    # text_handler.add_algorithm(SpellCheckAlgorithm(preproc_dir)) # Не работает :<
+#     text_handler.add_algorithm(LowerAlgorithm())
+#     text_handler.add_algorithm(AbbrExpandAlgorithm(preproc_dir, abbreviations))
+#     text_handler.add_algorithm(NumsProcAlgorithm())
+#     # text_handler.add_algorithm(SpellCheckAlgorithm(preproc_dir))
 
-    for i in range(len(data)):
-        data[i] = text_handler.process_text(data[i])
+#     for i in range(len(data)):
+#         data[i] = text_handler.process_text(data[i])
     
-    return data
+#     return data
 
 def proc_labled_data(data_dir):
     data_with_labels = read_data_with_labels(data_dir)
     transformed_labels = transform_labels(data_with_labels)
     data_with_labels['label'] = transformed_labels
+    data_with_labels = data_with_labels.drop(['id', 'updated_at'], axis=1)
 
     print(data_with_labels.head())
 
@@ -53,10 +57,40 @@ def process_texts(texts, abbreviations = None):
 
 
 def main():
+    data_dir = Path('.') / 'data'
+    preproc_dir = Path('.') / 'text_info'
+    config = Config({
+        'data_dir': Path('.') / 'data', 
+        'preproc_dir': Path('.') / 'text_info', 
+    })
+   
+
+    # data = pd.read_excel(data_dir / "data.xlsx").transpose().to_numpy()[0]
+
+    # pipeline = TrainPipeline()
+    # pipeline.add_stage(TextPreprocStage(save_excel = True, save_csv = False, save_sorted_abbreviations = False))
+
+    # pipeline.start_pipeline(data)
+
+    # Перед обучением следует подготовить обработчик данных SpellCheckAlgorithm. 
+    # Используйте следующий метод для генерации text_info/postprocdata.xlsx файла с уникальными словами.
+    # generate_unique_words(data_dir, preproc_dir)
+    # Теперь самостоятельно отредактируйте данный файл, чтобы убрать не нужные слова, если таковые имеются.
+
+    # После редактирования сохраните словарь.
+    # generate_dictionary(preproc_dir)
+
+    # Чтение и преобразование данных с готовыми метками
+    # proc_labled_data(data_dir)
+
+    # Обучение модели
+    # prepare_train_save_model(data_dir)
+
+
     # 1. Получение информации
-    root = Path('.')
-    data_dir = root / "data"
-    preproc_dir = root / "text_info"
+    # root = Path('.')
+    # data_dir = root / "data"
+    # preproc_dir = root / "text_info"
     
     # 2. Предобработка данных
     # data = pd.read_excel(data_dir / "data.xlsx").transpose().to_numpy()[0]
@@ -73,7 +107,7 @@ def main():
     # proc_labled_data(data_dir)
 
     # 5. Получение готовой модели
-    # prepare_train_save_model(data_dir)
+    prepare_train_save_model(data_dir)
 
     # 6. Применение готовой модели к предобработанным данным
 #     texts = ["""пахота зяби под многолетние травы
@@ -128,4 +162,5 @@ def main():
 #     outputs = process_texts(texts)
 #     print(outputs)
 
-main()
+if __name__ == "__main__":
+    main()

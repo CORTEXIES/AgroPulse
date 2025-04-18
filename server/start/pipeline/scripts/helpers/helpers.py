@@ -1,4 +1,3 @@
-from .xlsx_saver_reader import save_unique_words
 import numpy as np
 import pandas as pd
 
@@ -7,11 +6,20 @@ def generate_unique_words(data_dir, preproc_dir):
     words = set()
     for line in data:
         for word in line.split():
-            if any(str.isdigit(ch) for ch in word):
+            if any(str.isdigit(ch) for ch in word) or any(ch == '.' or ch == '/' for ch in word) or len(word) < 3:
                 continue
             words.add(word.lower())
     words = sorted(list(words))
-    save_unique_words(words, preproc_dir)
+    output = pd.DataFrame({'word': words})
+    output.to_excel(preproc_dir / 'unique_words.xlsx')
+
+def generate_dictionary(preproc_dir):
+    words = pd.read_excel(preproc_dir / "unique_words.xlsx").transpose().to_numpy()[1]
+        
+    dictionary_file = preproc_dir / "dictionary.txt"
+    with open(dictionary_file, mode="w", encoding="utf-8") as dict_file:
+        for word in words:
+            dict_file.write(word + "\n")
 
 def generate_abbreviations(preproc_dir, generate_sorted_abbreviations = False):
     abbreviations = pd.read_excel(preproc_dir / 'abbriviations.xlsx').to_numpy()

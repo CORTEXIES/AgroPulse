@@ -8,10 +8,6 @@ def save_postproc_data_table(data, initial_data, dir):
     output = pd.DataFrame({'initial': initial_data, 'postproc_data': data})
     output.to_excel(dir / "postprocdata.xlsx")
 
-def save_unique_words(words, dir):
-    output = pd.DataFrame({'word': words})
-    output.to_excel(dir / 'unique_words.xlsx')
-
 def transform_xlsx_into_csv(data_dir, name):
     data = pd.read_excel(data_dir / (name + '.xlsx'))
     # print(data.head())

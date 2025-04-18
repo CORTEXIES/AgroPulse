@@ -15,28 +15,13 @@ class LowerAlgorithm(ProcessingAlgorithm):
         super().__init__()
 
     def process_text(self, text: str) -> str:
-        return text.replace('\xa0', ' ').lower()
+        return text.replace('\xa0', ' ').replace(' га', ' ').replace(' га.', ' ').replace(' га/', ' ').lower()
 
 class AbbrExpandAlgorithm(ProcessingAlgorithm):
     def __init__(self, preproc_dir: Path = None, abbreviations = None):
         super().__init__()
         if abbreviations is None:
-            # reading abbreviations
-            abbreviations = pd.read_excel(preproc_dir / 'abbriviations.xlsx').to_numpy()
-            abbreviations = dict(abbreviations[:, 1:3].tolist())
-            for key, val in list(abbreviations.items()):
-                new_key = ''.join(key.split())
-                abbreviations[new_key] = val
-                new_key = ''.join(map(lambda s: s + '.', key.split()))
-                abbreviations[new_key] = val
-                new_key = ' '.join(map(lambda s: s + '.', key.split()))
-                abbreviations[new_key] = val
-            abbreviations = np.array(list(abbreviations.items()))
-            abbreviations = abbreviations[abbreviations[:, 0].argsort()[::-1]]
-            self.abbreviations = abbreviations
-
-            # output = pd.DataFrame({'abbreviation': abbreviations[:,0], 'full_text': abbreviations[:,1]})
-            # output.to_excel(preproc_dir / 'sortedabbriviations.xlsx')
+            raise AssertionError("abbreviations not provided at AbbrExpandAlgorithm class!")
         else:
             self.abbreviations = abbreviations
 
@@ -55,30 +40,22 @@ class NumsProcAlgorithm(ProcessingAlgorithm):
         super().__init__()
 
     def process_text(self, text: str) -> str:
-        pattern = r'(\d+/\d+)'
-        matches = re.findall(pattern, text)
+        matches = re.findall(r'(\d+/\d+)', text)
         for match in matches:
             per_day, per_operation = match.split('/')
-            text = text.replace(match, f'площадь за день {per_day} площадь с начала операции {per_operation}')
+            text = text.replace(match, f'день {per_day} от начала {per_operation}')
+        text = re.sub(r'[^a-zA-Zа-яА-ЯёЁ0-9,.\s]', ' ', text)
+        text = text.replace('-', ' ')
+        text = text.replace('   ', ' ').replace('  ', ' ')
         return text
 
-# TODO: Исправить этот класс. Он всегда выдает неверные предположения.
 class SpellCheckAlgorithm(ProcessingAlgorithm):
     def __init__(self, preproc_dir: Path):
         super().__init__()
         self.sym_spell = SymSpell()
-        
-        words = pd.read_excel(preproc_dir / "edited_unique_words.xlsx").transpose().to_numpy()[1]
-        
-        dictionary_file = preproc_dir / "dictionary.txt"
-        with open(dictionary_file, mode="w", encoding="utf-8") as dict_file:
-            for word in words:
-                dict_file.write(word + "\n")
-        
-        self.sym_spell.create_dictionary(str(dictionary_file))
+        self.sym_spell.create_dictionary(str(preproc_dir / "dictionary.txt"))
 
     def process_text(self, text: str) -> str:
-        text = re.sub(r'[^a-zA-Zа-яА-ЯёЁ0-9/.\s-]', '', text)
         correct_lines = []
         for line in text.split('\n'):
             correct_words = []
