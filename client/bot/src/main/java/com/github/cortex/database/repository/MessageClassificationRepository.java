@@ -1,14 +1,15 @@
 package com.github.cortex.database.repository;
 
-import com.github.cortex.database.dto.classifcation.ClassificationStatus;
-import com.github.cortex.database.dto.classifcation.MessageClassificationEntity;
-import jakarta.transaction.Transactional;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.github.cortex.database.dto.classifcation.ClassificationStatus;
+import com.github.cortex.database.dto.classifcation.MessageClassificationEntity;
 
 import java.util.List;
+import jakarta.transaction.Transactional;
 
 public interface MessageClassificationRepository extends JpaRepository<MessageClassificationEntity, Long> {
 

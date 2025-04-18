@@ -11,7 +11,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
 
 bot:
   name: ${BOT_NAME}
@@ -38,7 +38,8 @@ excel:
       "7": "Вал с начала, ц"
     }
   date_time_pattern: ${DATE_TIME_PATTERN}
-
+  cell:
+    fallback_value: "Не указано"
 proxy:
   post:
     url: ${POST_URL}

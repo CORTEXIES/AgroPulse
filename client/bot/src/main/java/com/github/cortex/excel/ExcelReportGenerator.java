@@ -26,17 +26,20 @@ public class ExcelReportGenerator {
     private final String relativePath;
     private final String filePrefix;
     private final String columnsConfig;
+    private final String fallbackCellValue;
 
     public ExcelReportGenerator(
             @Value("${excel.relative_path}") String relativePath,
             @Value("${excel.file_prefix}") String filePrefix,
             @Value("${excel.columns_config}") String columnsConfig,
-            @Value("${excel.date_time_pattern}") String pattern
+            @Value("${excel.date_time_pattern}") String pattern,
+            @Value("${excel.cell.fallback_value}") String fallbackCellValue
     ) {
         this.dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
         this.relativePath = relativePath;
         this.filePrefix = filePrefix;
         this.columnsConfig = columnsConfig;
+        this.fallbackCellValue =fallbackCellValue;
     }
 
     public File generate(List<MessageClassification> messages) {
@@ -127,32 +130,47 @@ public class ExcelReportGenerator {
         cell.setCellStyle(dateStyle);
 
         cell = row.createCell(1);
-        cell.setCellValue(msg.getDepartment());
+        String cellValue = prettyValue(msg.getDepartment());
+        cell.setCellValue(cellValue);
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(2);
-        cell.setCellValue(msg.getOperation());
+        cellValue = prettyValue(msg.getOperation());
+        cell.setCellValue(cellValue);
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(3);
-        cell.setCellValue(msg.getPlant());
+        cellValue = prettyValue(msg.getPlant());
+        cell.setCellValue(cellValue);
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(4);
-        cell.setCellValue(msg.getPerDay());
+        cellValue = prettyValue(msg.getPerDay());
+        cell.setCellValue(cellValue);
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(5);
-        cell.setCellValue(msg.getPerOperation());
+        cellValue = prettyValue(msg.getPerOperation());
+        cell.setCellValue(cellValue);
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(6);
-        cell.setCellValue(msg.getGrosPerDay());
+        cellValue = prettyValue(msg.getGrosPerDay());
+        cell.setCellValue(cellValue);
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(7);
-        cell.setCellValue(msg.getGrosPerOperation());
+        cellValue = prettyValue(msg.getGrosPerOperation());
+        cell.setCellValue(cellValue);
         cell.setCellStyle(cellStyle);
+    }
+
+    private String prettyValue(String value) {
+        return (value == null || value.isEmpty()) ? fallbackCellValue : value;
+    }
+
+    private String prettyValue(Integer value) {
+        return (value == null || value == -1) ? fallbackCellValue : value.toString();
     }
 
     private CellStyle createDateStyle(Workbook workbook, CellStyle baseCellStyle) {

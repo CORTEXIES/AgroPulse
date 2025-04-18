@@ -1,15 +1,16 @@
 package com.github.cortex.photo;
 
-import com.github.cortex.agro.service.AgroMessageFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.telegram.telegrambots.meta.api.methods.GetFile;
-import org.telegram.telegrambots.meta.api.methods.botapimethods.PartialBotApiMethod;
+
 import org.telegram.telegrambots.meta.api.objects.File;
+import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
+import org.telegram.telegrambots.meta.api.methods.botapimethods.PartialBotApiMethod;
 
 import java.util.Optional;
+import com.github.cortex.agro.service.AgroMessageFactory;
 
 @Component
 public class PhotoService {

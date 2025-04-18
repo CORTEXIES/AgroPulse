@@ -1,17 +1,18 @@
 package com.github.cortex.database.mapper.impl;
 
-import com.github.cortex.agro.dto.AgroMessage;
 import com.github.cortex.agro.dto.Agronomist;
+import com.github.cortex.agro.dto.AgroMessage;
+import com.github.cortex.database.mapper.EntityMapper;
 import com.github.cortex.database.dto.agro.AgronomistEntity;
+import com.github.cortex.database.repository.AgronomistRepository;
 import com.github.cortex.database.dto.classifcation.UnclassifiedMessageEntity;
 import com.github.cortex.database.dto.classifcation.UnclassifiedMessageStatus;
-import com.github.cortex.database.mapper.EntityMapper;
-import com.github.cortex.database.repository.AgronomistRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Optional;
+import java.time.LocalDateTime;
 
 @Component
 public class UnclassifiedAgroMessageMapper extends EntityMapper<UnclassifiedMessageEntity, AgroMessage> {
@@ -44,7 +45,8 @@ public class UnclassifiedAgroMessageMapper extends EntityMapper<UnclassifiedMess
 
         return new UnclassifiedMessageEntity(
                 entity,
-                agroMsg.report().get(),
+                agroMsg.report().orElse(null),
+                agroMsg.photoUrl().orElse(null),
                 LocalDateTime.now(),
                 UnclassifiedMessageStatus.UNCLASSIFIED
         );
@@ -55,7 +57,7 @@ public class UnclassifiedAgroMessageMapper extends EntityMapper<UnclassifiedMess
         return new AgroMessage(
                 agronomistMapper.toDto(entity.getAgronomist()),
                 Optional.of(entity.getReport()),
-                Optional.empty() //TODO: EDIT
+                Optional.of(entity.getPhotoUrl())
         );
     }
 }

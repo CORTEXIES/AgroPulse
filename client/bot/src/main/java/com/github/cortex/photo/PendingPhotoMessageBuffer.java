@@ -1,8 +1,8 @@
 package com.github.cortex.photo;
 
-import com.github.cortex.message.buffer.MessageBuffer;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
+import com.github.cortex.message.buffer.MessageBuffer;
 
 import java.util.List;
 import java.util.Optional;

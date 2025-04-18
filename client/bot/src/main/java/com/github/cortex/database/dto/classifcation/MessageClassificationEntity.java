@@ -1,11 +1,11 @@
 package com.github.cortex.database.dto.classifcation;
 
-import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 @Getter
 @Setter

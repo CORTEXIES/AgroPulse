@@ -1,13 +1,12 @@
 package com.github.cortex.agro.service;
 
-import com.github.cortex.agro.dto.AgroMessage;
 import com.github.cortex.agro.dto.Agronomist;
+import com.github.cortex.agro.dto.AgroMessage;
 import com.github.cortex.message.buffer.AgroMessageBuffer;
-import com.github.cortex.message.buffer.MessageBuffer;
+
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 

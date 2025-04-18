@@ -1,12 +1,12 @@
 package com.github.cortex.database.dto.classifcation;
 
-import com.github.cortex.database.dto.agro.AgronomistEntity;
-import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import com.github.cortex.database.dto.agro.AgronomistEntity;
 
 @Setter
 @Getter
@@ -26,8 +26,8 @@ public class UnclassifiedMessageEntity {
     @Column(length = 5000)
     private String report;
 
-//    @Lob
-//    private byte[] photo;
+    @Column(length = 500)
+    private String photoUrl;
 
     private LocalDateTime receivedAt;
 
@@ -37,11 +37,13 @@ public class UnclassifiedMessageEntity {
     public UnclassifiedMessageEntity(
             AgronomistEntity agronomist,
             String report,
+            String photoUrl,
             LocalDateTime receivedAt,
             UnclassifiedMessageStatus status
     ) {
         this.agronomist = agronomist;
         this.report = report;
+        this.photoUrl = photoUrl;
         this.receivedAt = receivedAt;
         this.status = status;
     }

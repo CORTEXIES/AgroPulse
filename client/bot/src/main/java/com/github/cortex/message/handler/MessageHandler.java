@@ -1,10 +1,9 @@
-package com.github.cortex.message.handler.impl;
-
-import com.github.cortex.agro.service.AgroMessageFactory;
-import com.github.cortex.message.handler.Handler;
-import com.github.cortex.command.utils.CommandExecutor;
+package com.github.cortex.message.handler;
 
 import com.github.cortex.photo.PhotoService;
+import com.github.cortex.agro.service.AgroMessageFactory;
+import com.github.cortex.command.utils.CommandExecutor;
+
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;

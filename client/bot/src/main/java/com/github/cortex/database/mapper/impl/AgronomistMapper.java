@@ -1,8 +1,9 @@
 package com.github.cortex.database.mapper.impl;
 
 import com.github.cortex.agro.dto.Agronomist;
-import com.github.cortex.database.dto.agro.AgronomistEntity;
 import com.github.cortex.database.mapper.EntityMapper;
+import com.github.cortex.database.dto.agro.AgronomistEntity;
+
 import org.springframework.stereotype.Component;
 
 @Component

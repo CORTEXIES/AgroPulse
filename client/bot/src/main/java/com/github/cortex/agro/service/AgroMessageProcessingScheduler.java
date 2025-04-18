@@ -55,7 +55,7 @@ public class AgroMessageProcessingScheduler {
         } catch (EmptyClassifiedMessagesException | MessageClassificationExchangeException ex) {
         	unclassifiedMessageService.record(messages);
         } catch (Exception ex) {
-            log.info("Unexpected error during agro message classification!");
+            log.error("Unexpected error during agro message classification!", ex);
         } finally {
             agroMessageBuffer.clear();
         }

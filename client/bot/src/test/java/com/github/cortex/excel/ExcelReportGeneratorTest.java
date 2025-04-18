@@ -42,8 +42,15 @@ public class ExcelReportGeneratorTest {
         String filePrefix = "Отчёт_за_";
         String columnsConfig = "{ \"0\": \"Дата\", \"1\": \"Подразделения\" }";
         String dateTimePattern = "dd_MM_yyyy";
+        String fallBackCellValue = "Не указано";
 
-        ExcelReportGenerator generator = new ExcelReportGenerator(relativePath, filePrefix, columnsConfig, dateTimePattern);
+        ExcelReportGenerator generator = new ExcelReportGenerator(
+                relativePath,
+                filePrefix,
+                columnsConfig,
+                dateTimePattern,
+                fallBackCellValue
+        );
         File result = generator.generate(classifiedMessages);
 
         assertNotNull(result);
