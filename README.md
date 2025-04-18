@@ -34,3 +34,33 @@ pip install -r requirements.txt
 ```bash
 fastapi run run_server.py
 ```
+
+
+## Запуск чата с модулем распознаванием таблиц (Gemma 3)
+
+Установака модуля 
+
+```bash
+cd ./AgroPulse/server/start/scripts/model_photo/llama.cpp/ 
+
+mkdir build
+
+cd  build
+
+cmake ..
+
+cmake --build . --config Release
+
+cd ./AgroPulse/server/start/scripts/model_photo/model_llm
+```
+
+Нужно загрузить 2 модели по ссылке  и поместить в папку model_llm
+
+https://drive.google.com/uc?export=download&id=17ANQO9QpMENTyT8AGxZKYpbvX-__d0zR
+https://drive.google.com/file/d/1LE50gm6RAUW4uGc6JAcBZBsnysOCFl_R/view
+
+Команда для запуска программы с поддержкой модуля распознавание таблиц
+
+```bash
+fastapi run run_server.py
+```
