@@ -1,9 +1,9 @@
 from pipeline.scripts.ProcessingAlgorithms.algorithms import LowerAlgorithm, AbbrExpandAlgorithm, NumsProcAlgorithm, SpellCheckAlgorithm
-# from scripts.ProcessingAlgorithms.texthandler import TextHandler
+from pipeline.scripts.ProcessingAlgorithms.texthandler import TextHandler
 from pipeline.scripts.helpers.helpers import generate_unique_words, generate_abbreviations, transform_labels, generate_dictionary
 from pipeline.scripts.helpers.xlsx_saver_reader import save_postproc_data_table, read_data_with_labels, transform_xlsx_into_csv, save_data_with_transformed_labels
 from pipeline.scripts.model.model import prepare_train_save_model
-# from scripts.model.model_usage import predict_labels, convert_multiple_labels_to_output
+from pipeline.scripts.model.model_usage import predict_labels, convert_multiple_labels_to_output
 from pipeline.scripts.model.model_precision import print_precision_scores
 from pathlib import Path
 import pandas as pd
@@ -139,7 +139,7 @@ def main():
 #     print(outputs)
 
     # 7. Проверка точности
-    # print_precision_scores(data_dir)
+    print_precision_scores(data_dir)
 
     # 8. Применение готовой модели с совместной обработкой данных
 #     texts = ["""Пахота зяби под мн тр
