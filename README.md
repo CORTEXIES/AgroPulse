@@ -8,7 +8,8 @@ AgroPulse — это система, предназначенная для ав�
 
 # ▶️ Preview
 
-<video src="https://github.com/CORTEXIES/AgroPulse/raw/main/assets/preview.mp4" controls width="100%"></video>
+<video src="https://github.com/user-attachments/assets/b8962673-ac56-4d34-8392-f26624944068" controls width="100%"></video>
+
 
 # 🧠 Подключение модуля ruBERT (Классификация текстов)
 
