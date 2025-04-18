@@ -166,7 +166,7 @@ def tokenize_and_align_labels(data, tokenizer):
     dataset = Dataset.from_dict(tokenized_inputs)
     return dataset
 
-def prepare_datasets(data_dir):
+def prepare_datasets(data_dir, new_model=True):
     print("Начало работы модуля разделения данных на выборки")
 
     data = pd.read_excel(data_dir / 'datawithbiolabels.xlsx')
@@ -175,7 +175,10 @@ def prepare_datasets(data_dir):
     print(train_data.head())
     print(val_data.head())
     
-    tokenizer, _ = download_pretrained_model()
+    if new_model:
+        tokenizer, _ = download_pretrained_model()
+    else:
+        tokenizer, _ = load_pretrained_model()
     
     train_tokenized = tokenize_and_align_labels(train_data, tokenizer)
     val_tokenized = tokenize_and_align_labels(val_data, tokenizer)
@@ -189,7 +192,7 @@ def prepare_datasets(data_dir):
 def prepare_train_save_model(data_dir, new_model = True):
     print("Начало работы основного метода создания модели.")
     
-    tokenized_datasets = prepare_datasets(data_dir)
+    tokenized_datasets = prepare_datasets(data_dir, new_model)
 
     tokenizer, model = train_model(tokenized_datasets, new_model)
         
