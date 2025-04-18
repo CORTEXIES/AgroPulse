@@ -75,7 +75,7 @@ cmake --build . --config Release
 Перейдите в директорию модели:
 
 ```bash
-cd ../../model_llm
+cd ./AgroPulse/server/start/scripts/model_photo/model_llm
 ```
 
 ## 📥 Загрузка моделей
