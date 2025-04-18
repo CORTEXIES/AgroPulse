@@ -6,7 +6,7 @@ AgroPulse — это система, предназначенная для ав�
 
 ![image](https://github.com/CORTEXIES/AgroPulse/blob/f5cecbee73ec14ac9a7215ab59859a15d84ff16c/assets/structure.png?raw=true)
 
-# ▶️ Preview
+## 👀 Предварительный просмотр
 
 <video src="https://github.com/user-attachments/assets/b8962673-ac56-4d34-8392-f26624944068" controls width="100%"></video>
 
