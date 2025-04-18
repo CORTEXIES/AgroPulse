@@ -15,7 +15,7 @@ class LowerAlgorithm(ProcessingAlgorithm):
         super().__init__()
 
     def process_text(self, text: str) -> str:
-        return text.replace('\xa0', ' ').replace(' га', ' ').replace(' га.', ' ').replace(' га/', ' ').lower()
+        return text.replace('\xa0', ' ').replace('га', ' ').lower()
 
 class AbbrExpandAlgorithm(ProcessingAlgorithm):
     def __init__(self, preproc_dir: Path = None, abbreviations = None):
