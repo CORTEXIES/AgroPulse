@@ -84,7 +84,10 @@ def train_model(tokenized_data, new_model = True):
     if new_model:
         trainer.train()
     else:
-        trainer.train(resume_from_checkpoint=get_latest_checkpoint("./results"))
+        try:
+            trainer.train(resume_from_checkpoint=get_latest_checkpoint("./results"))
+        except FileNotFoundError:
+            trainer.train()
     return tokenizer, model
 
 def get_latest_checkpoint(checkpoint_dir):
