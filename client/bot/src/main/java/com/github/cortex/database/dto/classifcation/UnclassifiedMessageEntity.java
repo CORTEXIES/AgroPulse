@@ -1,5 +1,6 @@
-package com.github.cortex.database.dto.agro;
+package com.github.cortex.database.dto.classifcation;
 
+import com.github.cortex.database.dto.agro.AgronomistEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,9 @@ public class UnclassifiedMessageEntity {
 
     @Column(length = 5000)
     private String report;
+
+//    @Lob
+//    private byte[] photo;
 
     private LocalDateTime receivedAt;
 

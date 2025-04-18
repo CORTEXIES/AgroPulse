@@ -1,3 +1,6 @@
 package com.github.cortex.agro.dto;
 
-public record AgroMessage(Agronomist agronomist, String report) { }
+
+import java.util.Optional;
+
+public record AgroMessage(Agronomist agronomist, Optional<String> report, Optional<String> photoUrl) { }

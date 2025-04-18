@@ -1,6 +1,6 @@
 package com.github.cortex.agro.service;
 
-import com.github.cortex.database.dto.agro.UnclassifiedMessageEntity;
+import com.github.cortex.database.dto.classifcation.UnclassifiedMessageEntity;
 import com.github.cortex.database.mapper.impl.UnclassifiedAgroMessageMapper;
 import com.github.cortex.database.repository.UnclassifiedMessageRepository;
 import com.github.cortex.agro.dto.AgroMessage;
