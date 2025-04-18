@@ -49,3 +49,26 @@ class NumsProcAlgorithm(ProcessingAlgorithm):
         text = text.replace('   ', ' ').replace('  ', ' ')
         return text
 
+class SpellCheckAlgorithm(ProcessingAlgorithm):
+    def __init__(self, preproc_dir: Path):
+        super().__init__()
+        self.sym_spell = SymSpell()
+        self.sym_spell.create_dictionary(str(preproc_dir / "dictionary.txt"))
+
+    def process_text(self, text: str) -> str:
+        correct_lines = []
+        for line in text.split('\n'):
+            correct_words = []
+            for word in line.split(' '):
+                if any(str.isdigit(ch) for ch in word):
+                    correct_words.append(word)
+                    continue
+                susgestions = self.sym_spell.lookup(word, max_edit_distance=2, verbosity=Verbosity.CLOSEST)
+                if susgestions:
+                    correct_words.append(susgestions[0].term)
+                else:
+                    correct_words.append(word)
+            correct_lines.append(' '.join(correct_words))
+        text = '\n'.join(correct_lines)
+        return text
+
