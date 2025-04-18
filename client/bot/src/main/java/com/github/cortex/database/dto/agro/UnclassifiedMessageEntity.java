@@ -22,6 +22,7 @@ public class UnclassifiedMessageEntity {
     @JoinColumn(name = "agronomist_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "unclassified_message_agronomist_id_fkey"))
     private AgronomistEntity agronomist;
 
+    @Column(length = 5000)
     private String report;
 
     private LocalDateTime receivedAt;

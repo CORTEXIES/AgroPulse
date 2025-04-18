@@ -1,14 +1,25 @@
 package com.github.cortex.photo;
 
-import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.objects.PhotoSize;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 
-import java.util.List;
-
-@Service
+@Component
 public class PhotoController {
 
-    public void handle(List<PhotoSize> photoData) {
+//    private final MessageBuffer<String> photIdBuffer;
+    private final PhotoExchangeService photoExchangeService;
+
+    @Autowired
+    public PhotoController(
+//            MessageBuffer<String> photoIdBuffer,
+            PhotoExchangeService photoExchangeService
+    ) {
+//        this.photIdBuffer = photoIdBuffer;
+        this.photoExchangeService = photoExchangeService;
+    }
+
+    public void recordPhotoId(Message message) {
 
     }
 }

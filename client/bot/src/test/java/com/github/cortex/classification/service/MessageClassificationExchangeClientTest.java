@@ -110,8 +110,6 @@ public class MessageClassificationExchangeClientTest {
     void executeClassification_RestClientException_throwsCustomException() {
         String postURL = "http://127.0.0.1:8000/messages/proc_many";
         RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
-        ResponseEntity<MessageClassificationResponse> responseEntity =
-                new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 
         MessageClassificationExchangeClient client = new MessageClassificationExchangeClient(restTemplate, postURL);
         when(restTemplate.exchange(

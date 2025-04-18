@@ -1,10 +1,10 @@
 package com.github.cortex.message.handler.impl;
 
-import com.github.cortex.photo.PhotoController;
 import com.github.cortex.agro.service.AgroMessageFactory;
 import com.github.cortex.message.handler.Handler;
 import com.github.cortex.command.utils.CommandExecutor;
 
+import com.github.cortex.photo.PhotoController;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,22 +20,22 @@ public class MessageHandler implements Handler {
 
     private final static int MINIMAL_TEXT_LENGTH_FOR_RECORD = 30;
 
-    private final PhotoController photoController;
-    private final AgroMessageFactory agroMessageFactory;
     private final CommandExecutor commandExecutor;
+    private final AgroMessageFactory agroMessageFactory;
+    private final PhotoController photoController;
 
     @Value("${bot.command.prefix}")
     private String COMMAND_PREFIX;
 
     @Autowired
     public MessageHandler(
-            PhotoController photoController,
+            CommandExecutor commandExecutor,
             AgroMessageFactory agroMessageFactory,
-            CommandExecutor commandExecutor
+            PhotoController photoController
     ) {
-        this.photoController = photoController;
         this.agroMessageFactory = agroMessageFactory;
         this.commandExecutor = commandExecutor;
+        this.photoController = photoController;
     }
 
     @Override
@@ -48,8 +48,8 @@ public class MessageHandler implements Handler {
         Message msg = update.getMessage();
         if (msg.hasText()) {
             return handleText(msg);
-        } else if (msg.hasPhoto()) {
-            photoController.handle(msg.getPhoto());
+        } else if (msg.hasPhoto() || msg.hasDocument()) {
+            photoController.recordPhotoId(msg);
         }
         return Optional.empty();
     }
