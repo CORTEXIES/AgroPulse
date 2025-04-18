@@ -55,8 +55,8 @@ def convert_labels_to_output(text, labels):
     result = []
     out_per_it = dict()
 
-    if len(labels) < len(tokens):
-        tokens = tokens[:len(labels)]
+    if len(labels) > len(tokens):
+        labels = labels[:len(tokens)]
     
     last_saved = True
     prev_label = None
@@ -82,6 +82,7 @@ def convert_labels_to_output(text, labels):
         result.append(out_per_it)
 
     return result
+
 
 def convert_multiple_labels_to_output(texts, labels_list):
     if len(texts) != len(labels_list):
