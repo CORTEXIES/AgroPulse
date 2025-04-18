@@ -5,7 +5,7 @@ from scripts.model.model_usage import predict_labels, convert_multiple_labels_to
 from pathlib import Path
 import pandas as pd
 
-def classify(texts, abbreviations = None):
+def classify(texts, abbreviations = None, tokenizer = None, model = None):
     if abbreviations is None:
         abbreviations = generate_abbreviations(Path('./text_info'), generate_sorted_abbreviations=False)
 
@@ -20,7 +20,7 @@ def classify(texts, abbreviations = None):
     
     del text_handler
 
-    labels_list = predict_labels(texts)
+    labels_list = predict_labels(texts, tokenizer, model)
     outputs = convert_multiple_labels_to_output(texts, labels_list)
     return outputs
 

@@ -4,8 +4,9 @@ import torch
 from datasets import Dataset
 import numpy as np
 
-def predict_labels(texts):
-    tokenizer, model = load_pretrained_model()
+def predict_labels(texts, tokenizer = None, model = None):
+    if tokenizer is None or model is None:
+        tokenizer, model = load_pretrained_model()
     id_to_label = get_id_to_label()
 
     tokenized_inputs = tokenizer(
@@ -58,28 +59,36 @@ def convert_labels_to_output(text, labels):
     if len(labels) < len(tokens):
         tokens = tokens[:len(labels)]
     
-    last_saved = True
     prev_label = None
     for i in range(len(tokens)):
         label = labels[i]
         if label == 'O':
+            prev_label = label
             continue
         label = label[2:]
         if out_per_it.get(label, None):
             if prev_label == None or prev_label == label:
                 out_per_it[label] += " " + tokens[i]
-                last_saved = False
-            else:
-                result.append(out_per_it)
-                out_per_it = dict()
-                last_saved = True
+            # else:
+            #     result.append(out_per_it)
+            #     out_per_it = {label: tokens[i]}
+            #     prev_label = label
         else:
             out_per_it[label] = tokens[i]
-            last_saved = False
         prev_label = label
 
-    if not last_saved:
-        result.append(out_per_it)
+    result.append(out_per_it)
+
+    words = text.split()
+    
+    for i in range(len(labels)):
+        labels[i] = labels[i][2:] if len(labels[i][2:]) > 1 else labels[i]
+    print("Text:")
+    for pair in list(zip(range(len(words)), words, labels)):
+        print(pair)
+    print("Result:")
+    for pair in result:
+        print(pair)
 
     return result
 
